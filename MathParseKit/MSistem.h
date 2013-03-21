@@ -1,7 +1,7 @@
 #ifndef _MSISTEM_H
 #define _MSISTEM_H
 
-namespace mtk
+namespace mpk
 {
 	class MSistem;
 }
@@ -9,7 +9,7 @@ namespace mtk
 #include "MFunction.h"
 #include "MRelation.h"
 
-namespace mtk
+namespace mpk
 {
 
 	struct MSistemItem;

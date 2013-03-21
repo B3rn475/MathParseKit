@@ -5,7 +5,7 @@
 #include "MFSqrt.h"
 #include "MFSub.h"
 
-using namespace mtk;
+using namespace mpk;
 
 MFAsin::MFAsin(MFunction *argument){
 	if (argument) m_argument=argument->Clone();

@@ -2,7 +2,7 @@
 #define _MFVAR_H
 
 #include "MFunction.h"
-namespace mtk
+namespace mpk
 {
 
 	class MFVar:public MFunction{

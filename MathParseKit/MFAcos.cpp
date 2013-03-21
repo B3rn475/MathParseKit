@@ -6,7 +6,7 @@
 #include "MFPow.h"
 #include "MFSub.h"
 
-using namespace mtk;
+using namespace mpk;
 
 MFAcos::MFAcos(MFunction *argument){
 	if (argument) m_argument=argument->Clone();

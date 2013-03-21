@@ -3,7 +3,7 @@
 #include "MFMul.h"
 #include "MFDiv.h"
 
-using namespace mtk;
+using namespace mpk;
 
 MFLog10::MFLog10(MFunction *argument){
 	if (argument) m_argument=argument->Clone();

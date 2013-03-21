@@ -3,7 +3,7 @@
 
 #include "MFunction.h"
 
-namespace mtk
+namespace mpk
 {
 
 	class MFMul:public MFunction{

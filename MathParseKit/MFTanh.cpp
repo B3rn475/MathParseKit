@@ -5,7 +5,7 @@
 #include "MFSub.h"
 #include "MFOpp.h"
 
-using namespace mtk;
+using namespace mpk;
 
 MFTanh::MFTanh(MFunction *argument){
 	if (argument) m_argument=argument->Clone();

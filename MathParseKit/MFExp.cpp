@@ -2,7 +2,7 @@
 #include "MFConst.h"
 #include "MFMul.h"
 
-using namespace mtk;
+using namespace mpk;
 
 MFExp::MFExp(MFunction *exponent){
 	if (exponent) m_exponent=exponent->Clone();

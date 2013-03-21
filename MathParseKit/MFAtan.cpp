@@ -5,7 +5,7 @@
 #include "MFAdd.h"
 #include "MFPow.h"
 
-using namespace mtk;
+using namespace mpk;
 
 MFAtan::MFAtan(MFunction *argument){
 	if (argument) m_argument=argument->Clone();

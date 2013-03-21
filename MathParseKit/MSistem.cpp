@@ -1,6 +1,6 @@
 #include "MSistem.h"
 
-using namespace mtk;
+using namespace mpk;
 
 MSistem::MSistem(){
 	m_list=NULL;

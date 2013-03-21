@@ -1,7 +1,7 @@
 #include "MFAdd.h"
 #include "MFConst.h"
 
-using namespace mtk;
+using namespace mpk;
 
 MFAdd::MFAdd(MFunction *lhs,MFunction *rhs){
 	if (lhs) m_lhs=lhs->Clone();

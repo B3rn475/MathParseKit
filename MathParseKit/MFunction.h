@@ -32,7 +32,7 @@
 
 #define MF_USER 30
 
-namespace mtk
+namespace mpk
 {
 
 	class MFunction;
@@ -47,7 +47,7 @@ namespace mtk
 #include <math.h>
 #include <stdlib.h>
 
-namespace mtk
+namespace mpk
 {
 
 	class MFunction{

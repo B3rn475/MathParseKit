@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <wchar.h>
 
-using namespace mtk;
+using namespace mpk;
 
 MParser::MParser(){
 	m_pos=0;

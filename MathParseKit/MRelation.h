@@ -1,7 +1,7 @@
 #ifndef _MRELATION_H
 #define _MRELATION_H
 
-namespace mtk
+namespace mpk
 {
 
 	class MRelation;
@@ -19,7 +19,7 @@ namespace mtk
 #define MR_MINOR_OR_EQUAL  MR_EQUAL|MR_MINOR
 #define MR_FINITE 0x0008
 
-namespace mtk
+namespace mpk
 {
 
 	class MRelation{

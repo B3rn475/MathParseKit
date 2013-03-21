@@ -3,7 +3,7 @@
 
 #include "MFunction.h"
 
-namespace mtk
+namespace mpk
 {
 
 	class MFCoTan:public MFunction{

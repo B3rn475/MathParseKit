@@ -4,7 +4,7 @@
 #include "MFDiv.h"
 #include "MFLn.h"
 
-using namespace mtk;
+using namespace mpk;
 
 MFLog::MFLog(MFunction *base,MFunction *argument){
 	if (base) this->m_base=base->Clone();

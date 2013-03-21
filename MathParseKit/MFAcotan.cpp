@@ -6,7 +6,7 @@
 #include "MFDiv.h"
 #include "MFPow.h"
 
-using namespace mtk;
+using namespace mpk;
 
 MFAcotan::MFAcotan(MFunction *argument){
 	if (argument) m_argument=argument->Clone();

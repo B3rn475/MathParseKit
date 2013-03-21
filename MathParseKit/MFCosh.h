@@ -2,7 +2,7 @@
 #define _MFCOSH_H
 
 #include "MFunction.h"
-namespace mtk
+namespace mpk
 {
 
 	class MFCosh:public MFunction{

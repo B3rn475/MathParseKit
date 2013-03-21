@@ -2,7 +2,7 @@
 #include "MFOpp.h"
 #include "MFConst.h"
 
-using namespace mtk;
+using namespace mpk;
 
 MFSub::MFSub(MFunction *lhs,MFunction *rhs){
 	if (lhs) m_lhs=lhs->Clone();

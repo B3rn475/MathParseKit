@@ -1,6 +1,6 @@
 #include "MVariableElement.h"
 
-using namespace mtk;
+using namespace mpk;
 
 MVariableElement::MVariableElement(const wchar_t* name,double value){
 	this->SetName(name);

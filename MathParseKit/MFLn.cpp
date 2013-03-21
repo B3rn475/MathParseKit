@@ -3,7 +3,7 @@
 #include "MFDiv.h"
 #include "MFMul.h"
 
-using namespace mtk;
+using namespace mpk;
 
 MFLn::MFLn(MFunction *argument){
 	if (argument) m_argument=argument->Clone();

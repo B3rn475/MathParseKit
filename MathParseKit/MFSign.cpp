@@ -4,7 +4,7 @@
 #include "MFMul.h"
 #include "MFDiv.h"
 
-using namespace mtk;
+using namespace mpk;
 
 MFSign::MFSign(MFunction *fn){
 	if (fn) m_fn=fn->Clone();

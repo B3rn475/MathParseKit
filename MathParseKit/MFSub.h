@@ -2,7 +2,7 @@
 #define _MFSUB_H
 
 #include "MFunction.h"
-namespace mtk
+namespace mpk
 {
 
 	class MFSub:public MFunction{

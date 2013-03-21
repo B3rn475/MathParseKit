@@ -1,6 +1,6 @@
 #include "MVariablesList.h"
 
-using namespace mtk;
+using namespace mpk;
 
 MVariablesList::MVariablesList(){
 	m_pt=NULL;

@@ -3,7 +3,7 @@
 
 #include <wchar.h>
 
-using namespace mtk;
+using namespace mpk;
 
 MFVar::MFVar(const wchar_t *name, unsigned int len){
 	m_type=MF_VAR;

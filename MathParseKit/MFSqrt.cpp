@@ -5,7 +5,7 @@
 #include "MFPow.h"
 #include "MFDiv.h"
 
-using namespace mtk;
+using namespace mpk;
 
 MFSqrt::MFSqrt(MFunction *fn){
 	if (fn) m_fn=fn->Clone();

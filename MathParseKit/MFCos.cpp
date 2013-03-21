@@ -4,7 +4,7 @@
 #include "MFMul.h"
 #include "MFSin.h"
 
-using namespace mtk;
+using namespace mpk;
 
 MFCos::MFCos(MFunction *argument){
 	if (argument) m_argument=argument->Clone();

@@ -6,7 +6,7 @@
 #include "MFLn.h"
 #include "MFSub.h"
 
-using namespace mtk;
+using namespace mpk;
 
 MFPow::MFPow(MFunction *base,MFunction *exponent){
 	if (base) m_base=base->Clone();

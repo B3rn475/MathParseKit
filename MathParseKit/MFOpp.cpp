@@ -1,7 +1,7 @@
 #include "MFOpp.h"
 #include "MFConst.h"
 
-using namespace mtk;
+using namespace mpk;
 
 MFOpp::MFOpp(MFunction *fn){
 	if (fn) m_fn=fn->Clone();

@@ -1,6 +1,6 @@
 #include "MFConst.h"
 
-using namespace mtk;
+using namespace mpk;
 
 MFConst::MFConst(double value){
 	m_type=MF_CONST;

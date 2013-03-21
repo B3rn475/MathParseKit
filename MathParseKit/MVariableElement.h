@@ -8,7 +8,7 @@
 
 #define variables_MAX_NAME_LEN 16
 
-namespace mtk
+namespace mpk
 {
 
 	class MVariableElement{

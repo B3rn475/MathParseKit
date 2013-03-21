@@ -3,7 +3,7 @@
 
 #include <limits>
 
-using namespace mtk;
+using namespace mpk;
 
 template<typename T> bool is_finite(T arg)
 {

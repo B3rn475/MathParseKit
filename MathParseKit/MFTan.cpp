@@ -5,7 +5,7 @@
 #include "MFPow.h"
 #include "MFCos.h"
 
-using namespace mtk;
+using namespace mpk;
 
 MFTan::MFTan(MFunction *argument){
 	if (argument) m_argument=argument->Clone();

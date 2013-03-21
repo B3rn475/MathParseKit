@@ -5,7 +5,7 @@
 #include "MFSub.h"
 #include "MFConst.h"
 
-using namespace mtk;
+using namespace mpk;
 
 MFDiv::MFDiv(MFunction *num,MFunction *denum){
 	if (num) m_num=num->Clone();

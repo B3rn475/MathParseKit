@@ -2,7 +2,7 @@
 #define _MFCOS_H
 
 #include "MFunction.h"
-namespace mtk
+namespace mpk
 {
 
 	class MFCos:public MFunction{

@@ -3,7 +3,7 @@
 #include "MFCos.h"
 #include "MFMul.h"
 
-using namespace mtk;
+using namespace mpk;
 
 MFSin::MFSin(MFunction *argument){
 	if (argument) m_argument=argument->Clone();
