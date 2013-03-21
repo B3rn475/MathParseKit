@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>MathToolKit</ProjectName>
+    <ProjectGuid>{3D5EBDBB-C3E2-4E6D-B008-659781ACD0C8}</ProjectGuid>
+    <RootNamespace>MathToolKit</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>11.0.51106.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="MFAbs.cpp" />
+    <ClCompile Include="MFAcos.cpp" />
+    <ClCompile Include="MFAcotan.cpp" />
+    <ClCompile Include="MFAdd.cpp" />
+    <ClCompile Include="MFAsin.cpp" />
+    <ClCompile Include="MFAtan.cpp" />
+    <ClCompile Include="MFConst.cpp" />
+    <ClCompile Include="MFCos.cpp" />
+    <ClCompile Include="MFCosh.cpp" />
+    <ClCompile Include="MFCoTan.cpp" />
+    <ClCompile Include="MFCoTanh.cpp" />
+    <ClCompile Include="MFDiv.cpp" />
+    <ClCompile Include="MFExp.cpp" />
+    <ClCompile Include="MFLn.cpp" />
+    <ClCompile Include="MFLog.cpp" />
+    <ClCompile Include="MFLog10.cpp" />
+    <ClCompile Include="MFMul.cpp" />
+    <ClCompile Include="MFOpp.cpp" />
+    <ClCompile Include="MFPow.cpp" />
+    <ClCompile Include="MFSign.cpp" />
+    <ClCompile Include="MFSin.cpp" />
+    <ClCompile Include="MFSinh.cpp" />
+    <ClCompile Include="MFSqrt.cpp" />
+    <ClCompile Include="MFSub.cpp" />
+    <ClCompile Include="MFTan.cpp" />
+    <ClCompile Include="MFTanh.cpp" />
+    <ClCompile Include="MFVar.cpp" />
+    <ClCompile Include="MParser.cpp" />
+    <ClCompile Include="MRelation.cpp" />
+    <ClCompile Include="MSistem.cpp" />
+    <ClCompile Include="MVariableList.cpp" />
+    <ClCompile Include="MVariablesElement.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MFAbs.h" />
+    <ClInclude Include="MFAcos.h" />
+    <ClInclude Include="MFAcotan.h" />
+    <ClInclude Include="MFAdd.h" />
+    <ClInclude Include="MFAsin.h" />
+    <ClInclude Include="MFAtan.h" />
+    <ClInclude Include="MFConst.h" />
+    <ClInclude Include="MFCos.h" />
+    <ClInclude Include="MFCosh.h" />
+    <ClInclude Include="MFCoTan.h" />
+    <ClInclude Include="MFCoTanh.h" />
+    <ClInclude Include="MFDiv.h" />
+    <ClInclude Include="MFExp.h" />
+    <ClInclude Include="MFLn.h" />
+    <ClInclude Include="MFLog.h" />
+    <ClInclude Include="MFLog10.h" />
+    <ClInclude Include="MFMul.h" />
+    <ClInclude Include="MFOpp.h" />
+    <ClInclude Include="MFPow.h" />
+    <ClInclude Include="MFSign.h" />
+    <ClInclude Include="MFSin.h" />
+    <ClInclude Include="MFSinh.h" />
+    <ClInclude Include="MFSqrt.h" />
+    <ClInclude Include="MFSub.h" />
+    <ClInclude Include="MFTan.h" />
+    <ClInclude Include="MFTanh.h" />
+    <ClInclude Include="MFunction.h" />
+    <ClInclude Include="MFVar.h" />
+    <ClInclude Include="MParser.h" />
+    <ClInclude Include="MRelation.h" />
+    <ClInclude Include="MSistem.h" />
+    <ClInclude Include="MVariableElement.h" />
+    <ClInclude Include="MVariablesList.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
