@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>MathToolKit</ProjectName>
+    <ProjectName>MathParseKit</ProjectName>
     <ProjectGuid>{3D5EBDBB-C3E2-4E6D-B008-659781ACD0C8}</ProjectGuid>
-    <RootNamespace>MathToolKit</RootNamespace>
+    <RootNamespace>MathParseKit</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

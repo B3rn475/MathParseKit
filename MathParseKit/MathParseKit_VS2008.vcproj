@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="MathToolKit"
+	Name="MathParseKit"
 	ProjectGUID="{3D5EBDBB-C3E2-4E6D-B008-659781ACD0C8}"
-	RootNamespace="MathToolKit"
+	RootNamespace="MathParseKit"
 	TargetFrameworkVersion="196613"
 	>
 	<Platforms>
