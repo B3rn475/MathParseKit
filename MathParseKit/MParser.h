@@ -129,12 +129,66 @@ namespace mpk
 			 * \return Returns Test passed without errors.
 			 */
 			bool AnalizeParentesis(const wchar_t *fStr);
+
+			/*! Analize a sequence of chars as a matematical function
+			 * 
+			 * 
+			 * \param fStr String to check.
+			 * \return Returns True if no Errors.
+			 */
 			bool AnalizePlane(const wchar_t *fStr, MFunction **pt, wchar_t delimiter = ')');
+			
+			/*! Analize a sequence of chars that can be a function or a variable
+			 * 
+			 * 0 = variable
+			 * other = number of chars composing the function name
+			 *
+			 * \param fStr String to check.
+			 * \return Returns number of chars composing the function name.
+			 */
+
 			unsigned int IsFunction(const wchar_t *fStr);
+			
+			/*! Analize a sequence of chars that can be a function or a variable
+			 * 
+			 * 
+			 * \param fStr String to check.
+			 * \return Returns True if no Errors.
+			 */
 			bool AnalizeFunction(const wchar_t *fStr, MFunction **pt);
+			
+			/*! Check if all chars are valid
+			 * 
+			 * (),.+-*^/abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
+			 * 
+			 * \param fStr String to check.
+			 * \return Returns Test passed without errors.
+			 */
 			bool AnalizeCharCoerency(const wchar_t *fStr);
+
+			/*! Analize a sequence of chars that form a sequence of elements and operators
+			 * 
+			 * 
+			 * \param fStr String to check.
+			 * \return Returns True if no Errors.
+			 */
 			bool CreateList(const wchar_t *fStr, FListElement **pt, wchar_t delimiter);
+
+			/*! Convert a list of FListElements in a tree
+			 * 
+			 * this function compact in sequence ^ power * and / multiplication and division + and - summation subtraction
+			 * 
+			 * \param fStr String to check.
+			 * \return Returns True if no Errors.
+			 */
 			bool ConvertList(FListElement *pt);
+
+			/*! Analize a sequence of chars that can be a constant, a function or a variable
+			 * 
+			 * 
+			 * \param fStr String to check.
+			 * \return Returns True if no Errors.
+			 */
 			bool ConvertElement(const wchar_t *fStr, MFunction **pt);
 	};
 }
