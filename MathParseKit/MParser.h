@@ -1,3 +1,10 @@
+/*!
+ * \file
+ * \author Carlo Bernaschina (www.bernaschina.com)
+ * \copyright Copyright 2013 Carlo Bernaschina. All rights reserved.
+ * \license This project is released under the GNU Lesser General Public License.
+ */
+
 #ifndef _MPARSER_H
 #define _MPARSER_H
 
@@ -48,6 +55,11 @@ namespace mpk
 		FListElement *next;
 	};
 
+	/*!MParser
+	 * Parser Class
+	 * 
+	 * Parser class that allow to convert a string into a tree of matematical functions
+	 */
 	class MParser{
 		protected:
 			unsigned int m_pos;

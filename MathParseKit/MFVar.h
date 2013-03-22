@@ -1,3 +1,10 @@
+/*!
+ * \file
+ * \author Carlo Bernaschina (www.bernaschina.com)
+ * \copyright Copyright 2013 Carlo Bernaschina. All rights reserved.
+ * \license This project is released under the GNU Lesser General Public License.
+ */
+
 #ifndef _MFVAR_H
 #define _MFVAR_H
 
