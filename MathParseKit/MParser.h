@@ -41,9 +41,22 @@
 #include "MVariableElement.h"
 #include "MVariablesList.h"
 
+/*!Parse Completed with success.*/ 
 #define MP_OK 0
+/*!Parse Error the function is trucated.
+ * 
+ * Generally is a missing closing bracket.
+ */ 
 #define MP_UNEXPECTED_END 1
+/*!Parse Error the char is unexpected.
+ * 
+ * Generally is a due to missing element '2+*5' or too much parameters 'Log10(5,2)'
+ */ 
 #define MP_UNEXPECTED_CHAR 2
+/*!Parse Error unknown function.
+ * 
+ * Generally wrong function name 'Log7(5)'
+ */ 
 #define MP_UNKNOWN_FUNCTION 3
 
 namespace mpk
@@ -62,25 +75,61 @@ namespace mpk
 	 */
 	class MParser{
 		protected:
-			unsigned int m_pos;
-			int error;
+			unsigned int m_pos; /*!< Last error position, used as internal "walker" during parsing */
+			int error; /*!< Last error code */
 
 		public:
 			MParser();
+
+			/*! Parse a string
+			 * 
+			 * \param fStr A string containing a function to parse
+			 * \return Pointer to the root element of the function.
+			 */
+
 			MFunction *ParseFunction(const wchar_t*fStr);
+			
+			/*! Prepare a string to parsing
+			 * 
+			 * Remove from the string characters that are not valid for the parser
+			 * Chars : ' '
+			 * 
+			 * \param str String that needs to be Cleaned.
+			 * \return Returns str for chaining function calls.
+			 */
 			wchar_t *Clean(wchar_t * str) const;
-			inline int GetLastError()
+
+			/*! Get the error code of the last error encountered
+			 * 
+			 * \return Error code.
+			 * \sa MP_OK MP_UNEXPECTED_END MP_UNEXPECTED_CHAR MP_UNKNOWN_FUNCTION
+			 */
+			inline int GetLastError() const
 			{
 				return error;
 			}
-			inline int GetErrorPosition()
+
+			/*! Get the error position of the last error encountered
+			 * 
+			 * \return Position in the parsed string.
+			 */
+			inline int GetErrorPosition() const
 			{
 				return m_pos;
 			}
 
 		protected:
+			/*! Check parentesis/brakets number and nesting
+			 * 
+			 * ...(....(...)....(...)...)... => OK
+			 * ...(....)...)....(...(...)... => KO
+			 * ...(....(...).... => KO
+			 * 
+			 * \param fStr String to check.
+			 * \return Returns Test passed without errors.
+			 */
 			bool AnalizeParentesis(const wchar_t *fStr);
-			bool AnalizePlane(const wchar_t *fStr, MFunction **pt,wchar_t delimiter=')');
+			bool AnalizePlane(const wchar_t *fStr, MFunction **pt, wchar_t delimiter = ')');
 			unsigned int IsFunction(const wchar_t *fStr);
 			bool AnalizeFunction(const wchar_t *fStr, MFunction **pt);
 			bool AnalizeCharCoerency(const wchar_t *fStr);
