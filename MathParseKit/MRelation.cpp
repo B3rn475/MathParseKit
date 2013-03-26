@@ -19,7 +19,7 @@ template<typename T> bool is_finite(T arg)
            arg != -std::numeric_limits<T>::infinity();
 }
 
-MRelation::MRelation(int type,MFunction *lhs,MFunction *rhs){
+MRelation::MRelation(int type, const MFunction *lhs, const MFunction *rhs){
 	m_type=type;
 	m_lhs=lhs->Clone();
 	m_rhs=rhs->Clone();
@@ -36,7 +36,7 @@ MRelation::~MRelation(){
 	m_rhs->Release();
 }
 
-bool MRelation::IsTrue(MVariablesList *variables){
+bool MRelation::IsTrue(MVariablesList *variables) const{
 	MFunction *flhs,*frhs;
 	flhs=m_lhs->Solve(variables);
 	if (flhs->GetType()!=MF_CONST){
@@ -66,12 +66,12 @@ bool MRelation::IsTrue(MVariablesList *variables){
 	return ret;
 }
 
-MVariablesList* MRelation::GetVariablesList(){
+MVariablesList* MRelation::GetVariablesList() const{
 	MVariablesList *list=m_lhs->GetVariablesList();
 	return m_rhs->GetVariablesList(list);
 }
 
-MRelation *MRelation::Solve(MVariablesList *variables){
+MRelation *MRelation::Solve(MVariablesList *variables) const{
 	MRelation *ret=new MRelation(m_type);
 	ret->m_lhs=m_lhs->Solve(variables);
 	ret->m_rhs=m_rhs->Solve(variables);
@@ -88,10 +88,10 @@ void MRelation::GetRightFunction(MFunction &origin){
 	m_rhs=origin.Clone();
 }
 
-MFunction *MRelation::GetLeftFunction(){
+MFunction *MRelation::GetLeftFunction() const{
 	return m_lhs->Clone();
 }
 
-MFunction *MRelation::GetRightFunction(){
+MFunction *MRelation::GetRightFunction() const{
 	return m_rhs->Clone();
 }

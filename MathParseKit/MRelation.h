@@ -37,22 +37,22 @@ namespace mpk
 			int m_type;
 		
 		public:
-			MRelation(int type=MR_EQUAL,MFunction* lhs=NULL,MFunction* rhs=NULL);
+			MRelation(int type=MR_EQUAL, const MFunction* lhs=NULL, const MFunction* rhs=NULL);
 			MRelation(MRelation &origin);
 			~MRelation();
 			void SetType(int type=MR_EQUAL){
 				m_type=type;
 			};
-			inline int GetType(){
+			inline int GetType() const{
 				return m_type;
 			};
-			bool IsTrue(MVariablesList *variables);
-			MVariablesList *GetVariablesList();
-			MRelation *Solve(MVariablesList *variables);
+			bool IsTrue(MVariablesList *variables) const;
+			MVariablesList *GetVariablesList() const;
+			MRelation *Solve(MVariablesList *variables) const;
 			void SetLeftFunction(MFunction &origin);
 			void GetRightFunction(MFunction &origin);
-			MFunction *GetLeftFunction();
-			MFunction *GetRightFunction();
+			MFunction *GetLeftFunction() const;
+			MFunction *GetRightFunction() const;
 
 	};
 

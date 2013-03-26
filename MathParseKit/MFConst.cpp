@@ -14,32 +14,32 @@ MFConst::MFConst(double value){
 	m_value=value;
 }
 
-MFunction* MFConst::Clone(){
+MFunction* MFConst::Clone() const{
 	return new MFConst(m_value);
 }
 
-bool MFConst::IsOk(){
+bool MFConst::IsOk() const{
 	return true;
 }
 
-bool MFConst::IsConstant(MVariablesList* variables){
+bool MFConst::IsConstant(MVariablesList* variables) const{
 	return true;
 }
 
-MFunction* MFConst::Solve(MVariablesList* variables){
+MFunction* MFConst::Solve(MVariablesList* variables) const{
 	return this->Clone();
 }
 
-MFunction* MFConst::Derivate(MVariablesList *){
+MFunction* MFConst::Derivate(MVariablesList *) const{
 	return new MFConst();
 }
 
-MVariablesList* MFConst::GetVariablesList(MVariablesList *list){
+MVariablesList* MFConst::GetVariablesList(MVariablesList *list) const{
 	if (!list) list= new MVariablesList();
 	return list;
 }
 
-MSistem* MFConst::CalcDominum(MSistem *update){
+MSistem* MFConst::GetDomain(MSistem *update) const{
 	if (!update) update=new MSistem();
 	return update;
 }

@@ -18,23 +18,23 @@ MFCosh::MFCosh(MFunction *argument){
 	m_type=MF_COSH;
 }
 
-MFunction* MFCosh::Clone(){
+MFunction* MFCosh::Clone() const{
 	return new MFCosh(m_argument);
 }
 
-bool MFCosh::IsOk(){
+bool MFCosh::IsOk() const{
 	if (!m_argument) return false;
 	if (!m_argument->IsOk()) return false;
 	return true;
 }
 
-bool MFCosh::IsConstant(MVariablesList* variables){
+bool MFCosh::IsConstant(MVariablesList* variables) const{
 	if (m_argument)
 		if(!m_argument->IsConstant(variables)) return false;
 	return true;
 }
 
-MFunction* MFCosh::Solve(MVariablesList* variables){
+MFunction* MFCosh::Solve(MVariablesList* variables) const{
 	if (!m_argument) return new MFConst(0.0);
 	MFunction *argument=m_argument->Solve(variables);
 	if (argument->GetType()==MF_CONST){
@@ -47,7 +47,7 @@ MFunction* MFCosh::Solve(MVariablesList* variables){
 	return ret;
 }
 
-MFunction* MFCosh::Derivate(MVariablesList *variables){
+MFunction* MFCosh::Derivate(MVariablesList *variables) const{
 	if (!m_argument) return NULL;
 	if (m_argument->IsConstant(variables)) return new MFConst(0.0);
 	MFunction *fn=m_argument->Derivate(variables);
@@ -59,14 +59,14 @@ MFunction* MFCosh::Derivate(MVariablesList *variables){
 	return ret;
 }
 
-MVariablesList* MFCosh::GetVariablesList(MVariablesList *list){
+MVariablesList* MFCosh::GetVariablesList(MVariablesList *list) const{
 	if (!m_argument) return list;
 	return m_argument->GetVariablesList(list);
 }
 
-MSistem* MFCosh::CalcDominum(MSistem *update){
+MSistem* MFCosh::GetDomain(MSistem *update) const{
 	if (!m_argument) return update;
-	return m_argument->CalcDominum(update);
+	return m_argument->GetDomain(update);
 }
 
 void MFCosh::SetArgument(MFunction *argument){

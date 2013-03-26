@@ -15,7 +15,7 @@
 
 using namespace mpk;
 
-MFPow::MFPow(MFunction *base,MFunction *exponent){
+MFPow::MFPow(const MFunction *base, const MFunction *exponent){
 	if (base) m_base=base->Clone();
 	else m_base=NULL;
 	if (exponent) m_exponent=exponent->Clone();
@@ -23,11 +23,11 @@ MFPow::MFPow(MFunction *base,MFunction *exponent){
 	m_type=MF_POW;
 }
 
-MFunction* MFPow::Clone(){
+MFunction* MFPow::Clone() const{
 	return new MFPow(m_base,m_exponent);
 }
 
-bool MFPow::IsOk(){
+bool MFPow::IsOk() const{
 	if (!m_base) return false;
 	if (!m_exponent) return false;
 	if (!m_base->IsOk()) return false;
@@ -35,7 +35,7 @@ bool MFPow::IsOk(){
 	return true;
 }
 
-bool MFPow::IsConstant(MVariablesList* variables){
+bool MFPow::IsConstant(MVariablesList* variables) const{
 	if (m_base)
 		if(!m_base->IsConstant(variables)) return false;
 	if (m_exponent)
@@ -43,7 +43,7 @@ bool MFPow::IsConstant(MVariablesList* variables){
 	return true;
 }
 
-MFunction* MFPow::Solve(MVariablesList* variables){
+MFunction* MFPow::Solve(MVariablesList* variables) const{
 	if (!m_base || !m_exponent) return new MFConst(0.0);
 	MFunction *base=m_base->Solve(variables);
 	MFunction *exponent=m_exponent->Solve(variables);
@@ -59,7 +59,7 @@ MFunction* MFPow::Solve(MVariablesList* variables){
 	return ret;
 }
 
-MFunction* MFPow::Derivate(MVariablesList *variables){
+MFunction* MFPow::Derivate(MVariablesList *variables) const{
 	if (!m_base || !m_exponent) return NULL;
 	if (m_base->IsConstant(variables)){
 		if (m_exponent->IsConstant(variables)){
@@ -114,16 +114,16 @@ MFunction* MFPow::Derivate(MVariablesList *variables){
 	}
 }
 
-MVariablesList* MFPow::GetVariablesList(MVariablesList *list){
+MVariablesList* MFPow::GetVariablesList(MVariablesList *list) const{
 	if (!m_base || !m_exponent) return list;
 	list = m_base->GetVariablesList(list);
 	return m_exponent->GetVariablesList(list);
 }
 
-MSistem* MFPow::CalcDominum(MSistem *update){
+MSistem* MFPow::GetDomain(MSistem *update) const{
 	if (!m_base || !m_exponent) return update;
-	update = m_base->CalcDominum(update);
-	update = m_exponent->CalcDominum(update);
+	update = m_base->GetDomain(update);
+	update = m_exponent->GetDomain(update);
 	if (!update) update=new MSistem();
 	MFConst z(0.0);
 	update->Add(MR_FINITE,*this,z);

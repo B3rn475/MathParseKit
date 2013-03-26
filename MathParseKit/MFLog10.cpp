@@ -18,23 +18,23 @@ MFLog10::MFLog10(MFunction *argument){
 	m_type=MF_LOG10;
 }
 
-MFunction* MFLog10::Clone(){
+MFunction* MFLog10::Clone() const{
 	return new MFLog10(m_argument);
 }
 
-bool MFLog10::IsOk(){
+bool MFLog10::IsOk() const{
 	if (!m_argument) return false;
 	if (!m_argument->IsOk()) return false;
 	return true;
 }
 
-bool MFLog10::IsConstant(MVariablesList* variables){
+bool MFLog10::IsConstant(MVariablesList* variables) const{
 	if (m_argument)
 		if(!m_argument->IsConstant(variables)) return false;
 	return true;
 }
 
-MFunction* MFLog10::Solve(MVariablesList* variables){
+MFunction* MFLog10::Solve(MVariablesList* variables) const{
 	if (!m_argument) return new MFConst(0.0);
 	MFunction *argument=m_argument->Solve(variables);
 	if (argument->GetType()==MF_CONST){
@@ -47,7 +47,7 @@ MFunction* MFLog10::Solve(MVariablesList* variables){
 	return ret;
 }
 
-MFunction* MFLog10::Derivate(MVariablesList *variables){
+MFunction* MFLog10::Derivate(MVariablesList *variables) const{
 	if (!m_argument) return NULL;
 	if (m_argument->IsConstant(variables)) return new MFConst(0.0);
 	MFunction *fn=m_argument->Derivate(variables);
@@ -63,14 +63,14 @@ MFunction* MFLog10::Derivate(MVariablesList *variables){
 	return ret;
 }
 
-MVariablesList* MFLog10::GetVariablesList(MVariablesList *list){
+MVariablesList* MFLog10::GetVariablesList(MVariablesList *list) const{
 	if (!m_argument) return list;
 	return m_argument->GetVariablesList(list);
 }
 
-MSistem* MFLog10::CalcDominum(MSistem *update){
+MSistem* MFLog10::GetDomain(MSistem *update) const{
 	if (!m_argument) return update;
-	update = m_argument->CalcDominum(update);
+	update = m_argument->GetDomain(update);
 	if (!update) update=new MSistem();
 	MFConst z(0.0);
 	update->Add(MR_MAJOR,*m_argument,z);

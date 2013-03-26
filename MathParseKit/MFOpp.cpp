@@ -16,23 +16,23 @@ MFOpp::MFOpp(MFunction *fn){
 	m_type=MF_OPP;
 }
 
-MFunction* MFOpp::Clone(){
+MFunction* MFOpp::Clone() const{
 	return new MFOpp(m_fn);
 }
 
-bool MFOpp::IsOk(){
+bool MFOpp::IsOk() const{
 	if (!m_fn) return false;
 	if (!m_fn->IsOk()) return false;
 	return true;
 }
 
-bool MFOpp::IsConstant(MVariablesList* variables){
+bool MFOpp::IsConstant(MVariablesList* variables) const{
 	if (m_fn)
 		if(!m_fn->IsConstant(variables)) return false;
 	return true;
 }
 
-MFunction* MFOpp::Solve(MVariablesList* variables){
+MFunction* MFOpp::Solve(MVariablesList* variables) const{
 	if (!m_fn) return new MFConst(0.0);
 	MFunction *fn=m_fn->Solve(variables);
 	if (fn->GetType()==MF_CONST){
@@ -45,7 +45,7 @@ MFunction* MFOpp::Solve(MVariablesList* variables){
 	return ret;
 }
 
-MFunction* MFOpp::Derivate(MVariablesList *variables){
+MFunction* MFOpp::Derivate(MVariablesList *variables) const{
 	if (!m_fn) return NULL;
 	if (m_fn->IsConstant(variables)) return new MFConst(0.0);
 	MFunction *fn=m_fn->Derivate(variables);
@@ -55,14 +55,14 @@ MFunction* MFOpp::Derivate(MVariablesList *variables){
 	return ret;
 }
 
-MVariablesList* MFOpp::GetVariablesList(MVariablesList *list){
+MVariablesList* MFOpp::GetVariablesList(MVariablesList *list) const{
 	if (!m_fn) return list;
 	return m_fn->GetVariablesList(list);
 }
 
-MSistem* MFOpp::CalcDominum(MSistem *update){
+MSistem* MFOpp::GetDomain(MSistem *update) const{
 	if (!m_fn) return update;
-	return m_fn->CalcDominum(update);
+	return m_fn->GetDomain(update);
 }
 
 void MFOpp::SetFn(MFunction *fn){

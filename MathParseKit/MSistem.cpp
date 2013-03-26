@@ -33,7 +33,7 @@ int MSistem::Add(){
 	return ++m_count;
 }
 
-int MSistem::Add(int type, MFunction &lhs, MFunction &rhs){
+int MSistem::Add(int type, const MFunction &lhs, const MFunction &rhs){
 	MSistemItem **walker=&m_list;
 	while ((*walker)){
 		walker=&((*walker)->next);
@@ -77,7 +77,7 @@ int MSistem::Remove(int index){
 	return --m_count;
 }
 
-bool MSistem::Solve(MVariablesList *variables){
+bool MSistem::Solve(MVariablesList *variables) const{
 	for (int i=0; i<m_count;i++){
 		if (!Item(i)->IsTrue(variables)) return false;
 	}

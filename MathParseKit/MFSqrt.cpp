@@ -20,23 +20,23 @@ MFSqrt::MFSqrt(MFunction *fn){
 	m_type=MF_SQRT;
 }
 
-MFunction* MFSqrt::Clone(){
+MFunction* MFSqrt::Clone() const{
 	return new MFSqrt(m_fn);
 }
 
-bool MFSqrt::IsOk(){
+bool MFSqrt::IsOk() const{
 	if (!m_fn) return false;
 	if (!m_fn->IsOk()) return false;
 	return true;
 }
 
-bool MFSqrt::IsConstant(MVariablesList* variables){
+bool MFSqrt::IsConstant(MVariablesList* variables) const{
 	if (m_fn)
 		if(!m_fn->IsConstant(variables)) return false;
 	return true;
 }
 
-MFunction* MFSqrt::Solve(MVariablesList* variables){
+MFunction* MFSqrt::Solve(MVariablesList* variables) const{
 	if (!m_fn) return new MFConst(0.0);
 	MFunction *fn=m_fn->Solve(variables);
 	if (fn->GetType()==MF_CONST){
@@ -62,7 +62,7 @@ MFunction* MFSqrt::Solve(MVariablesList* variables){
 	return ret;
 }
 
-MFunction* MFSqrt::Derivate(MVariablesList *variables){
+MFunction* MFSqrt::Derivate(MVariablesList *variables) const{
 	if (!m_fn) return new MFConst(0.0);
 	if (m_fn->IsConstant(variables)) return new MFConst(0.0);
 	MFunction *fn=m_fn->Derivate(variables);
@@ -76,14 +76,14 @@ MFunction* MFSqrt::Derivate(MVariablesList *variables){
 	return ret;
 }
 
-MVariablesList* MFSqrt::GetVariablesList(MVariablesList *list){
+MVariablesList* MFSqrt::GetVariablesList(MVariablesList *list) const{
 	if (!m_fn) return list;
 	return m_fn->GetVariablesList(list);
 }
 
-MSistem* MFSqrt::CalcDominum(MSistem *update){
+MSistem* MFSqrt::GetDomain(MSistem *update) const{
 	if (!m_fn) return update;
-	update = m_fn->CalcDominum(update);
+	update = m_fn->GetDomain(update);
 	if (!update) update=new MSistem();
 	MFConst z(0.0);
 	update->Add(MR_MAJOR_OR_EQUAL,*m_fn,z);

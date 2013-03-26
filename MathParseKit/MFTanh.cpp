@@ -20,23 +20,23 @@ MFTanh::MFTanh(MFunction *argument){
 	m_type=MF_TANH;
 }
 
-MFunction* MFTanh::Clone(){
+MFunction* MFTanh::Clone() const{
 	return new MFTanh(m_argument);
 }
 
-bool MFTanh::IsOk(){
+bool MFTanh::IsOk() const{
 	if (!m_argument) return false;
 	if (!m_argument->IsOk()) return false;
 	return true;
 }
 
-bool MFTanh::IsConstant(MVariablesList* variables){
+bool MFTanh::IsConstant(MVariablesList* variables) const{
 	if (m_argument)
 		if(!m_argument->IsConstant(variables)) return false;
 	return true;
 }
 
-MFunction* MFTanh::Solve(MVariablesList* variables){
+MFunction* MFTanh::Solve(MVariablesList* variables) const{
 	if (!m_argument) return new MFConst(0.0);
 	MFunction *argument=m_argument->Solve(variables);
 	if (argument->GetType()==MF_CONST){
@@ -49,7 +49,7 @@ MFunction* MFTanh::Solve(MVariablesList* variables){
 	return ret;
 }
 
-MFunction* MFTanh::Derivate(MVariablesList *variables){
+MFunction* MFTanh::Derivate(MVariablesList *variables) const{
 	if (!m_argument) return NULL;
 	if (m_argument->IsConstant(variables)) return new MFConst(0.0);
 	MFunction *fn=m_argument->Derivate(variables);
@@ -69,14 +69,14 @@ MFunction* MFTanh::Derivate(MVariablesList *variables){
 	return ret;
 }
 
-MVariablesList* MFTanh::GetVariablesList(MVariablesList *list){
+MVariablesList* MFTanh::GetVariablesList(MVariablesList *list) const{
 	if (!m_argument) return list;
 	return m_argument->GetVariablesList(list);
 }
 
-MSistem* MFTanh::CalcDominum(MSistem *update){
+MSistem* MFTanh::GetDomain(MSistem *update) const{
 	if (!m_argument) return update;
-	return m_argument->CalcDominum(update);
+	return m_argument->GetDomain(update);
 }
 
 void MFTanh::SetArgument(MFunction *argument){

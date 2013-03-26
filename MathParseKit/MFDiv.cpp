@@ -22,11 +22,11 @@ MFDiv::MFDiv(MFunction *num,MFunction *denum){
 	m_type=MF_DIV;
 }
 
-MFunction* MFDiv::Clone(){
+MFunction* MFDiv::Clone() const{
 	return new MFDiv(m_num,m_denum);
 }
 
-bool MFDiv::IsOk(){
+bool MFDiv::IsOk() const{
 	if (!m_num) return false;
 	if (!m_denum) return false;
 	if (!m_num->IsOk()) return false;
@@ -34,7 +34,7 @@ bool MFDiv::IsOk(){
 	return true;
 }
 
-bool MFDiv::IsConstant(MVariablesList* variables){
+bool MFDiv::IsConstant(MVariablesList* variables) const{
 	if (m_num)
 		if(!m_num->IsConstant(variables)) return false;
 	if (m_denum)
@@ -42,7 +42,7 @@ bool MFDiv::IsConstant(MVariablesList* variables){
 	return true;
 }
 
-MFunction* MFDiv::Solve(MVariablesList* variables){
+MFunction* MFDiv::Solve(MVariablesList* variables) const{
 	if (!m_num || !m_denum) return new MFConst(0.0);
 	MFunction *num=m_num->Solve(variables);
 	MFunction *denum=m_denum->Solve(variables);
@@ -58,7 +58,7 @@ MFunction* MFDiv::Solve(MVariablesList* variables){
 	return ret;
 }
 
-MFunction* MFDiv::Derivate(MVariablesList *variables){
+MFunction* MFDiv::Derivate(MVariablesList *variables) const{
 	if (!m_num || !m_denum) return NULL;
 	if (m_num->IsConstant(variables)){
 		if (m_denum->IsConstant(variables)){
@@ -109,16 +109,16 @@ MFunction* MFDiv::Derivate(MVariablesList *variables){
 	}
 }
 
-MVariablesList* MFDiv::GetVariablesList(MVariablesList *list){
+MVariablesList* MFDiv::GetVariablesList(MVariablesList *list) const{
 	if (!m_num || !m_denum) return list;
 	list = m_num->GetVariablesList(list);
 	return m_denum->GetVariablesList(list);
 }
 
-MSistem* MFDiv::CalcDominum(MSistem *update){
+MSistem* MFDiv::GetDomain(MSistem *update) const{
 	if (!m_num || !m_denum) return update;
-	update = m_num->CalcDominum(update);
-	update = m_denum->CalcDominum(update);
+	update = m_num->GetDomain(update);
+	update = m_denum->GetDomain(update);
 	if (!update) update=new MSistem();
 	MFConst z(0.0);
 	update->Add(MR_NOT_EQUAL,*m_denum,z);

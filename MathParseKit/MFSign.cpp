@@ -19,23 +19,23 @@ MFSign::MFSign(MFunction *fn){
 	m_type=MF_SIGN;
 }
 
-MFunction* MFSign::Clone(){
+MFunction* MFSign::Clone() const{
 	return new MFSign(m_fn);
 }
 
-bool MFSign::IsOk(){
+bool MFSign::IsOk() const{
 	if (!m_fn) return false;
 	if (!m_fn->IsOk()) return false;
 	return true;
 }
 
-bool MFSign::IsConstant(MVariablesList* variables){
+bool MFSign::IsConstant(MVariablesList* variables) const{
 	if (m_fn)
 		if(!m_fn->IsConstant(variables)) return false;
 	return true;
 }
 
-MFunction* MFSign::Solve(MVariablesList* variables){
+MFunction* MFSign::Solve(MVariablesList* variables) const{
 	if (!m_fn) return new MFConst(0.0);
 	MFunction *fn=m_fn->Solve(variables);
 	if (fn->GetType()==MF_CONST){
@@ -50,7 +50,7 @@ MFunction* MFSign::Solve(MVariablesList* variables){
 	return ret;
 }
 
-MFunction* MFSign::Derivate(MVariablesList *variables){
+MFunction* MFSign::Derivate(MVariablesList *variables) const{
 	if (!m_fn) return new MFConst(0.0);
 	if (m_fn->IsConstant(variables)) return new MFConst(0.0);
 	MFDiv *ret=new MFDiv(NULL,m_fn);
@@ -58,14 +58,14 @@ MFunction* MFSign::Derivate(MVariablesList *variables){
 	return ret;
 }
 
-MVariablesList* MFSign::GetVariablesList(MVariablesList *list){
+MVariablesList* MFSign::GetVariablesList(MVariablesList *list) const{
 	if (!m_fn) return list;
 	return m_fn->GetVariablesList(list);
 }
 
-MSistem* MFSign::CalcDominum(MSistem *update){
+MSistem* MFSign::GetDomain(MSistem *update) const{
 	if (!m_fn) return update;
-	return m_fn->CalcDominum(update);
+	return m_fn->GetDomain(update);
 }
 
 void MFSign::SetFn(MFunction *fn){

@@ -19,11 +19,11 @@ MFSub::MFSub(MFunction *lhs,MFunction *rhs){
 	m_type=MF_SUB;
 }
 
-MFunction* MFSub::Clone(){
+MFunction* MFSub::Clone() const{
 	return new MFSub(m_lhs,m_rhs);
 }
 
-bool MFSub::IsOk(){
+bool MFSub::IsOk() const{
 	if (!m_lhs) return false;
 	if (!m_rhs) return false;
 	if (!m_lhs->IsOk()) return false;
@@ -31,7 +31,7 @@ bool MFSub::IsOk(){
 	return true;
 }
 
-bool MFSub::IsConstant(MVariablesList* variables){
+bool MFSub::IsConstant(MVariablesList* variables) const{
 	if (m_lhs)
 		if(!m_lhs->IsConstant(variables)) return false;
 	if (m_rhs)
@@ -39,7 +39,7 @@ bool MFSub::IsConstant(MVariablesList* variables){
 	return true;
 }
 
-MFunction* MFSub::Solve(MVariablesList* variables){
+MFunction* MFSub::Solve(MVariablesList* variables) const{
 	if (!m_lhs || !m_rhs) return new MFConst(0.0);
 	MFunction *lhs=m_lhs->Solve(variables);
 	MFunction *rhs=m_rhs->Solve(variables);
@@ -55,7 +55,7 @@ MFunction* MFSub::Solve(MVariablesList* variables){
 	return ret;
 }
 
-MFunction* MFSub::Derivate(MVariablesList *variables){
+MFunction* MFSub::Derivate(MVariablesList *variables) const{
 	if (!m_lhs || !m_rhs) return NULL;
 	if (m_lhs->IsConstant(variables)){
 		if (m_rhs->IsConstant(variables)){
@@ -83,16 +83,16 @@ MFunction* MFSub::Derivate(MVariablesList *variables){
 	}
 }
 
-MVariablesList* MFSub::GetVariablesList(MVariablesList *list){
+MVariablesList* MFSub::GetVariablesList(MVariablesList *list) const{
 	if (!m_lhs || !m_rhs) return list;
 	list = m_lhs->GetVariablesList(list);
 	return m_rhs->GetVariablesList(list);
 }
 
-MSistem* MFSub::CalcDominum(MSistem *update){
+MSistem* MFSub::GetDomain(MSistem *update) const{
 	if (!m_lhs || !m_rhs) return update;
-	update = m_lhs->CalcDominum(update);
-	return m_rhs->CalcDominum(update);
+	update = m_lhs->GetDomain(update);
+	return m_rhs->GetDomain(update);
 }
 
 void MFSub::SetLhs(MFunction *lhs){

@@ -19,23 +19,23 @@ MFAbs::MFAbs(MFunction *fn){
 	m_type=MF_ABS;
 }
 
-MFunction* MFAbs::Clone(){
+MFunction* MFAbs::Clone() const{
 	return new MFAbs(m_fn);
 }
 
-bool MFAbs::IsOk(){
+bool MFAbs::IsOk() const{
 	if (!m_fn) return false;
 	if (!m_fn->IsOk()) return false;
 	return true;
 }
 
-bool MFAbs::IsConstant(MVariablesList* variables){
+bool MFAbs::IsConstant(MVariablesList* variables) const{
 	if (m_fn)
 		if(!m_fn->IsConstant(variables)) return false;
 	return true;
 }
 
-MFunction* MFAbs::Solve(MVariablesList* variables){
+MFunction* MFAbs::Solve(MVariablesList* variables) const{
 	if (!m_fn) return new MFConst(0.0);
 	MFunction *fn=m_fn->Solve(variables);
 	if (fn->GetType()==MF_CONST){
@@ -48,7 +48,7 @@ MFunction* MFAbs::Solve(MVariablesList* variables){
 	return ret;
 }
 
-MFunction* MFAbs::Derivate(MVariablesList *variables){
+MFunction* MFAbs::Derivate(MVariablesList *variables) const{
 	if (!m_fn) return new MFConst(0.0);
 	if (m_fn->IsConstant(variables)) return new MFConst(0.0);
 	MFunction *fn=m_fn->Derivate(variables);
@@ -60,14 +60,14 @@ MFunction* MFAbs::Derivate(MVariablesList *variables){
 	return ret;
 }
 
-MVariablesList* MFAbs::GetVariablesList(MVariablesList *list){
+MVariablesList* MFAbs::GetVariablesList(MVariablesList *list) const{
 	if (!m_fn) return list;
 	return m_fn->GetVariablesList(list);
 }
 
-MSistem* MFAbs::CalcDominum(MSistem *update){
+MSistem* MFAbs::GetDomain(MSistem *update) const{
 	if (!m_fn) return update;
-	return m_fn->CalcDominum(update);
+	return m_fn->GetDomain(update);
 }
 
 void MFAbs::SetFn(MFunction *fn){

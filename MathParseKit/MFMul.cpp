@@ -12,7 +12,7 @@
 
 using namespace mpk;
 
-MFMul::MFMul(MFunction *lhs,MFunction *rhs){
+MFMul::MFMul(const MFunction *lhs,const MFunction *rhs){
 	if (lhs) m_lhs=lhs->Clone();
 	else m_lhs=NULL;
 	if (rhs) m_rhs=rhs->Clone();
@@ -20,11 +20,11 @@ MFMul::MFMul(MFunction *lhs,MFunction *rhs){
 	m_type=MF_MUL;
 }
 
-MFunction* MFMul::Clone(){
+MFunction* MFMul::Clone() const{
 	return new MFMul(m_lhs,m_rhs);
 }
 
-bool MFMul::IsOk(){
+bool MFMul::IsOk() const{
 	if (!m_lhs) return false;
 	if (!m_rhs) return false;
 	if (!m_lhs->IsOk()) return false;
@@ -32,7 +32,7 @@ bool MFMul::IsOk(){
 	return true;
 }
 
-bool MFMul::IsConstant(MVariablesList* variables){
+bool MFMul::IsConstant(MVariablesList* variables) const{
 	if (m_lhs)
 		if(!m_lhs->IsConstant(variables)) return false;
 	if (m_rhs)
@@ -40,7 +40,7 @@ bool MFMul::IsConstant(MVariablesList* variables){
 	return true;
 }
 
-MFunction* MFMul::Solve(MVariablesList* variables){
+MFunction* MFMul::Solve(MVariablesList* variables) const{
 	if (!m_lhs || !m_rhs) return new MFConst(0.0);
 	MFunction *lhs=m_lhs->Solve(variables);
 	MFunction *rhs=m_rhs->Solve(variables);
@@ -56,7 +56,7 @@ MFunction* MFMul::Solve(MVariablesList* variables){
 	return ret;
 }
 
-MFunction* MFMul::Derivate(MVariablesList *variables){
+MFunction* MFMul::Derivate(MVariablesList *variables) const{
 	if (!m_lhs || !m_rhs) return NULL;
 	if (m_lhs->IsConstant(variables)){
 		if (m_rhs->IsConstant(variables)){
@@ -92,16 +92,16 @@ MFunction* MFMul::Derivate(MVariablesList *variables){
 	}
 }
 
-MVariablesList* MFMul::GetVariablesList(MVariablesList *list){
+MVariablesList* MFMul::GetVariablesList(MVariablesList *list) const{
 	if (!m_lhs || !m_rhs) return list;
 	list = m_lhs->GetVariablesList(list);
 	return m_rhs->GetVariablesList(list);
 }
 
-MSistem* MFMul::CalcDominum(MSistem *update){
+MSistem* MFMul::GetDomain(MSistem *update) const{
 	if (!m_lhs || !m_rhs) return update;
-	update = m_lhs->CalcDominum(update);
-	return m_rhs->CalcDominum(update);
+	update = m_lhs->GetDomain(update);
+	return m_rhs->GetDomain(update);
 }
 
 void MFMul::SetLhs(MFunction *lhs){

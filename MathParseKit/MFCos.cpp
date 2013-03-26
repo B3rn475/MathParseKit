@@ -19,23 +19,23 @@ MFCos::MFCos(MFunction *argument){
 	m_type=MF_ACOS;
 }
 
-MFunction* MFCos::Clone(){
+MFunction* MFCos::Clone() const{
 	return new MFCos(m_argument);
 }
 
-bool MFCos::IsOk(){
+bool MFCos::IsOk() const{
 	if (!m_argument) return false;
 	if (!m_argument->IsOk()) return false;
 	return true;
 }
 
-bool MFCos::IsConstant(MVariablesList* variables){
+bool MFCos::IsConstant(MVariablesList* variables) const{
 	if (m_argument)
 		if(!m_argument->IsConstant(variables)) return false;
 	return true;
 }
 
-MFunction* MFCos::Solve(MVariablesList* variables){
+MFunction* MFCos::Solve(MVariablesList* variables) const{
 	if (!m_argument) return new MFConst(0.0);
 	MFunction *argument=m_argument->Solve(variables);
 	if (argument->GetType()==MF_CONST){
@@ -48,7 +48,7 @@ MFunction* MFCos::Solve(MVariablesList* variables){
 	return ret;
 }
 
-MFunction* MFCos::Derivate(MVariablesList *variables){
+MFunction* MFCos::Derivate(MVariablesList *variables) const{
 	if (!m_argument) return NULL;
 	if (m_argument->IsConstant(variables)) return new MFConst(0.0);
 	MFunction *fn=m_argument->Derivate(variables);
@@ -62,14 +62,14 @@ MFunction* MFCos::Derivate(MVariablesList *variables){
 	return ret;
 }
 
-MVariablesList* MFCos::GetVariablesList(MVariablesList *list){
+MVariablesList* MFCos::GetVariablesList(MVariablesList *list) const{
 	if (!m_argument) return list;
 	return m_argument->GetVariablesList(list);
 }
 
-MSistem* MFCos::CalcDominum(MSistem *update){
+MSistem* MFCos::GetDomain(MSistem *update) const{
 	if (!m_argument) return update;
-	return m_argument->CalcDominum(update);
+	return m_argument->GetDomain(update);
 }
 
 void MFCos::SetArgument(MFunction *argument){

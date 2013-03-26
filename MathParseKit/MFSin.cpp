@@ -18,23 +18,23 @@ MFSin::MFSin(MFunction *argument){
 	m_type=MF_SIN;
 }
 
-MFunction* MFSin::Clone(){
+MFunction* MFSin::Clone() const{
 	return new MFSin(m_argument);
 }
 
-bool MFSin::IsOk(){
+bool MFSin::IsOk() const{
 	if (!m_argument) return false;
 	if (!m_argument->IsOk()) return false;
 	return true;
 }
 
-bool MFSin::IsConstant(MVariablesList* variables){
+bool MFSin::IsConstant(MVariablesList* variables) const{
 	if (m_argument)
 		if(!m_argument->IsConstant(variables)) return false;
 	return true;
 }
 
-MFunction* MFSin::Solve(MVariablesList* variables){
+MFunction* MFSin::Solve(MVariablesList* variables) const{
 	if (!m_argument) return new MFConst(0.0);
 	MFunction *argument=m_argument->Solve(variables);
 	if (argument->GetType()==MF_CONST){
@@ -47,7 +47,7 @@ MFunction* MFSin::Solve(MVariablesList* variables){
 	return ret;
 }
 
-MFunction* MFSin::Derivate(MVariablesList *variables){
+MFunction* MFSin::Derivate(MVariablesList *variables) const{
 	if (!m_argument) return NULL;
 	if (m_argument->IsConstant(variables)) return new MFConst(0.0);
 	MFunction *fn=m_argument->Derivate(variables);
@@ -59,14 +59,14 @@ MFunction* MFSin::Derivate(MVariablesList *variables){
 	return ret;
 }
 
-MVariablesList* MFSin::GetVariablesList(MVariablesList *list){
+MVariablesList* MFSin::GetVariablesList(MVariablesList *list) const{
 	if (!m_argument) return list;
 	return m_argument->GetVariablesList(list);
 }
 
-MSistem* MFSin::CalcDominum(MSistem *update){
+MSistem* MFSin::GetDomain(MSistem *update) const{
 	if (!m_argument) return update;
-	return m_argument->CalcDominum(update);
+	return m_argument->GetDomain(update);
 }
 
 void MFSin::SetArgument(MFunction *argument){

@@ -17,41 +17,41 @@ MFVar::MFVar(const wchar_t *name, unsigned int len){
 	m_name=NULL;
 	SetName(name,len);
 }
-MFunction* MFVar::Clone(){
+MFunction* MFVar::Clone() const{
 	return new MFVar(m_name);
 }
 
-bool MFVar::IsOk(){
+bool MFVar::IsOk() const{
 	if (m_name) return true;
 	return false;
 }
 
-bool MFVar::IsConstant(MVariablesList *variables){
+bool MFVar::IsConstant(MVariablesList *variables) const{
 	if (variables->FindItem(m_name)==-1) return true;
 	return false;
 }
 
-MFunction* MFVar::Solve(MVariablesList* variables){
+MFunction* MFVar::Solve(MVariablesList* variables) const const{
 	if (!variables) return Clone();
 	MVariableElement *element=variables->GetItem(m_name);
 	if (element) return new MFConst(element->GetValue());
 	return Clone();
 }
 
-MFunction* MFVar::Derivate(MVariablesList *variables){
+MFunction* MFVar::Derivate(MVariablesList *variables) const const{
 	if (!variables) return NULL;
 	if (variables->FindItem(m_name)==-1) return new MFConst(0.0);
 	return new MFConst(1.0);
 }
 
-MVariablesList* MFVar::GetVariablesList(MVariablesList *list){
+MVariablesList* MFVar::GetVariablesList(MVariablesList *list) const const{
 	if (!list) list= new MVariablesList();
 	if (list->FindItem(m_name)==-1)
 	list->Add(m_name);
 	return list;
 }
 
-MSistem* MFVar::CalcDominum(MSistem *update){
+MSistem* MFVar::GetDomain(MSistem *update) const const{
 	if (!update) update=new MSistem();
 	return update;
 }

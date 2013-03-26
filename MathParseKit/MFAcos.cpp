@@ -21,23 +21,23 @@ MFAcos::MFAcos(MFunction *argument){
 	m_type=MF_ASIN;
 }
 
-MFunction* MFAcos::Clone(){
+MFunction* MFAcos::Clone() const{
 	return new MFAcos(m_argument);
 }
 
-bool MFAcos::IsOk(){
+bool MFAcos::IsOk() const{
 	if (!m_argument) return false;
 	if (!m_argument->IsOk()) return false;
 	return true;
 }
 
-bool MFAcos::IsConstant(MVariablesList* variables){
+bool MFAcos::IsConstant(MVariablesList* variables) const{
 	if (m_argument)
 		if(!m_argument->IsConstant(variables)) return false;
 	return true;
 }
 
-MFunction* MFAcos::Solve(MVariablesList* variables){
+MFunction* MFAcos::Solve(MVariablesList* variables) const{
 	if (!m_argument) return new MFConst(0.0);
 	MFunction *argument=m_argument->Solve(variables);
 	if (argument->GetType()==MF_CONST){
@@ -50,7 +50,7 @@ MFunction* MFAcos::Solve(MVariablesList* variables){
 	return ret;
 }
 
-MFunction* MFAcos::Derivate(MVariablesList *variables){
+MFunction* MFAcos::Derivate(MVariablesList *variables) const{
 	if (!m_argument) return NULL;
 	if (m_argument->IsConstant(variables)) return new MFConst(0.0);
 	MFunction *fn=m_argument->Derivate(variables);
@@ -70,14 +70,14 @@ MFunction* MFAcos::Derivate(MVariablesList *variables){
 	return ret;
 }
 
-MVariablesList* MFAcos::GetVariablesList(MVariablesList *list){
+MVariablesList* MFAcos::GetVariablesList(MVariablesList *list) const{
 	if (!m_argument) return list;
 	return m_argument->GetVariablesList(list);
 }
 
-MSistem* MFAcos::CalcDominum(MSistem *update){
+MSistem* MFAcos::GetDomain(MSistem *update) const{
 	if (!m_argument) return update;
-	update = m_argument->CalcDominum(update);
+	update = m_argument->GetDomain(update);
 	if (!update) update=new MSistem();
 	MFConst z(-1.0);
 	update->Add(MR_MAJOR_OR_EQUAL,*m_argument,z);

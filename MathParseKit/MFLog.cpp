@@ -21,11 +21,11 @@ MFLog::MFLog(MFunction *base,MFunction *argument){
 	m_type=MF_LOG;
 }
 
-MFunction* MFLog::Clone(){
+MFunction* MFLog::Clone() const{
 	return new MFLog(m_base,m_argument);
 }
 
-bool MFLog::IsOk(){
+bool MFLog::IsOk() const{
 	if (!m_base) return false;
 	if (!m_argument) return false;
 	if (!m_base->IsOk()) return false;
@@ -33,7 +33,7 @@ bool MFLog::IsOk(){
 	return true;
 }
 
-bool MFLog::IsConstant(MVariablesList* variables){
+bool MFLog::IsConstant(MVariablesList* variables) const{
 	if (m_base)
 		if(!m_base->IsConstant(variables)) return false;
 	if (m_argument)
@@ -41,7 +41,7 @@ bool MFLog::IsConstant(MVariablesList* variables){
 	return true;
 }
 
-MFunction* MFLog::Solve(MVariablesList* variables){
+MFunction* MFLog::Solve(MVariablesList* variables) const{
 	if (!m_base || !m_argument) return new MFConst(0.0);
 	MFunction *base=m_base->Solve(variables);
 	MFunction *argument=m_argument->Solve(variables);
@@ -57,7 +57,7 @@ MFunction* MFLog::Solve(MVariablesList* variables){
 	return ret;
 }
 
-MFunction *MFLog::Derivate(MVariablesList *variables){
+MFunction *MFLog::Derivate(MVariablesList *variables) const{
 	if (!m_base || !m_argument) return NULL;
 	if (m_base->IsConstant(variables) && m_argument->IsConstant(variables)){
 		return new MFConst(0.0);
@@ -71,16 +71,16 @@ MFunction *MFLog::Derivate(MVariablesList *variables){
 	return ret;
 }
 
-MVariablesList* MFLog::GetVariablesList(MVariablesList *list){
+MVariablesList* MFLog::GetVariablesList(MVariablesList *list) const{
 	if (!m_base || !m_argument) return list;
 	list = m_base->GetVariablesList(list);
 	return m_argument->GetVariablesList(list);
 }
 
-MSistem* MFLog::CalcDominum(MSistem *update){
+MSistem* MFLog::GetDomain(MSistem *update) const{
 	if (!m_base || !m_argument) return update;
-	update = m_base->CalcDominum(update);
-	update = m_argument->CalcDominum(update);
+	update = m_base->GetDomain(update);
+	update = m_argument->GetDomain(update);
 	if (!update) update=new MSistem();
 	MFConst z(0.0);
 	update->Add(MR_MAJOR,*m_base,z);

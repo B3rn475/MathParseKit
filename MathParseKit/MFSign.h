@@ -19,13 +19,13 @@ namespace mpk
 
 		public:
 		MFSign(MFunction *fn=NULL);
-		virtual MFunction* Clone();
-		virtual bool IsOk();
-		virtual bool IsConstant(MVariablesList* variables);
-		virtual MFunction* Solve(MVariablesList* variables);
-		virtual MFunction* Derivate(MVariablesList *variables);
-		virtual MVariablesList* GetVariablesList(MVariablesList *list=NULL);
-		virtual MSistem* CalcDominum(MSistem *update);
+		virtual MFunction* Clone() const;
+		virtual bool IsOk() const;
+		virtual bool IsConstant(MVariablesList* variables) const;
+		virtual MFunction* Solve(MVariablesList* variables) const;
+		virtual MFunction* Derivate(MVariablesList *variables) const;
+		virtual MVariablesList* GetVariablesList(MVariablesList *list=NULL) const;
+		virtual MSistem* GetDomain(MSistem *update) const;
 		inline MFunction *GetFn(){
 			return m_fn;
 		}

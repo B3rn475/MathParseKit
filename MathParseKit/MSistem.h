@@ -33,14 +33,15 @@ namespace mpk
 			MSistem(MSistem &origin);
 			~MSistem();
 			int Add();
-			int Add(int type, MFunction &lhs, MFunction &rhs);
+			int Add(int type, const MFunction &lhs, const MFunction &rhs);
 			int Add(MRelation &relation);
-			inline int Count(){
+			inline int Count() const{
 				return m_count;
 			};
 			MRelation *Item(int index);
+			const MRelation *Item(int index) const;
 			int Remove(int index);
-			bool Solve(MVariablesList *variables);
+			bool Solve(MVariablesList *variables) const;
 	};
 
 	struct MSistemItem{

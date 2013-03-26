@@ -20,23 +20,23 @@ MFAtan::MFAtan(MFunction *argument){
 	m_type=MF_COTAN;
 }
 
-MFunction* MFAtan::Clone(){
+MFunction* MFAtan::Clone() const{
 	return new MFAtan(m_argument);
 }
 
-bool MFAtan::IsOk(){
+bool MFAtan::IsOk() const{
 	if (!m_argument) return false;
 	if (!m_argument->IsOk()) return false;
 	return true;
 }
 
-bool MFAtan::IsConstant(MVariablesList* variables){
+bool MFAtan::IsConstant(MVariablesList* variables) const{
 	if (m_argument)
 		if(!m_argument->IsConstant(variables)) return false;
 	return true;
 }
 
-MFunction* MFAtan::Solve(MVariablesList* variables){
+MFunction* MFAtan::Solve(MVariablesList* variables) const{
 	if (!m_argument) return new MFConst(0.0);
 	MFunction *argument=m_argument->Solve(variables);
 	if (argument->GetType()==MF_CONST){
@@ -49,7 +49,7 @@ MFunction* MFAtan::Solve(MVariablesList* variables){
 	return ret;
 }
 
-MFunction* MFAtan::Derivate(MVariablesList *variables){
+MFunction* MFAtan::Derivate(MVariablesList *variables) const{
 	if (!m_argument) return NULL;
 	if (m_argument->IsConstant(variables)) return new MFConst(0.0);
 	MFunction *fn=m_argument->Derivate(variables);
@@ -68,14 +68,14 @@ MFunction* MFAtan::Derivate(MVariablesList *variables){
 	return ret;
 }
 
-MVariablesList* MFAtan::GetVariablesList(MVariablesList *list){
+MVariablesList* MFAtan::GetVariablesList(MVariablesList *list) const{
 	if (!m_argument) return list;
 	return m_argument->GetVariablesList(list);
 }
 
-MSistem* MFAtan::CalcDominum(MSistem *update){
+MSistem* MFAtan::GetDomain(MSistem *update) const{
 	if (!m_argument) return update;
-	return m_argument->CalcDominum(update);
+	return m_argument->GetDomain(update);
 }
 
 void MFAtan::SetArgument(MFunction *argument){

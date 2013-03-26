@@ -18,11 +18,11 @@ MFAdd::MFAdd(MFunction *lhs,MFunction *rhs){
 	m_type=MF_ADD;
 }
 
-MFunction* MFAdd::Clone(){
+MFunction* MFAdd::Clone() const{
 	return new MFAdd(m_lhs,m_rhs);
 }
 
-bool MFAdd::IsOk(){
+bool MFAdd::IsOk() const{
 	if (!m_lhs) return false;
 	if (!m_rhs) return false;
 	if (!m_lhs->IsOk()) return false;
@@ -30,7 +30,7 @@ bool MFAdd::IsOk(){
 	return true;
 }
 
-bool MFAdd::IsConstant(MVariablesList* variables){
+bool MFAdd::IsConstant(MVariablesList* variables) const{
 	if (m_lhs)
 		if(!m_lhs->IsConstant(variables)) return false;
 	if (m_rhs)
@@ -38,7 +38,7 @@ bool MFAdd::IsConstant(MVariablesList* variables){
 	return true;
 }
 
-MFunction* MFAdd::Solve(MVariablesList* variables){
+MFunction* MFAdd::Solve(MVariablesList* variables) const{
 	if (!m_lhs || !m_rhs) return new MFConst(0.0);
 	MFunction *lhs=m_lhs->Solve(variables);
 	MFunction *rhs=m_rhs->Solve(variables);
@@ -54,7 +54,7 @@ MFunction* MFAdd::Solve(MVariablesList* variables){
 	return ret;
 }
 
-MFunction* MFAdd::Derivate(MVariablesList *variables){
+MFunction* MFAdd::Derivate(MVariablesList *variables) const{
 	if (!m_lhs || !m_rhs) return NULL;
 	if (m_lhs->IsConstant(variables)){
 		if (m_rhs->IsConstant(variables)){
@@ -78,16 +78,16 @@ MFunction* MFAdd::Derivate(MVariablesList *variables){
 	}
 }
 
-MVariablesList* MFAdd::GetVariablesList(MVariablesList *list){
+MVariablesList* MFAdd::GetVariablesList(MVariablesList *list) const{
 	if (!m_lhs || !m_rhs) return list;
 	list = m_lhs->GetVariablesList(list);
 	return m_rhs->GetVariablesList(list);
 }
 
-MSistem* MFAdd::CalcDominum(MSistem *update){
+MSistem* MFAdd::GetDomain(MSistem *update) const{
 	if (!m_lhs || !m_rhs) return update;
-	update = m_lhs->CalcDominum(update);
-	return m_rhs->CalcDominum(update);
+	update = m_lhs->GetDomain(update);
+	return m_rhs->GetDomain(update);
 }
 
 void MFAdd::SetLhs(MFunction *lhs){
