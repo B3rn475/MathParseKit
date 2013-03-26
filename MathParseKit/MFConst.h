@@ -12,10 +12,12 @@
 
 namespace mpk
 {
-
+	/*!MFConst
+	 * Constant element in a function
+	 */
 	class MFConst:public MFunction{
 		protected:
-			double m_value;
+			double m_value; /*!< Value of the constant */
 
 		public:
 		MFConst(double value=0.0);
@@ -26,13 +28,23 @@ namespace mpk
 		virtual MFunction* Derivate(MVariablesList *variables) const;
 		virtual MVariablesList* GetVariablesList(MVariablesList *list=NULL) const;
 		virtual MSistem* GetDomain(MSistem *update) const;
-		inline double GetValue(){
+		virtual void Release();
+		
+		/*! Get Value of the constant
+		 * 
+		 * \return Returns the Value of the constant.
+		 */
+		inline double GetValue() const{
 			return m_value;
 		}
+		/*! Set Value of the constant
+		 * 
+		 * \param value New value of the constant.
+		 */
 		inline void SetValue(double value){
-			m_value+=value;
+			m_value = value;
 		}
-		virtual void Release();
+		
 		bool operator==(MFConst &B)const;
 		bool operator>=(MFConst &B)const;
 		bool operator<=(MFConst &B)const;
