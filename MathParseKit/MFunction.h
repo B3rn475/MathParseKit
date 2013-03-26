@@ -104,6 +104,9 @@ namespace mpk
 		 * Clone This function and all the child recursively
 		 * 
 		 * It needs to be reimplemented in child classes
+		 * 
+		 * 
+		 * \return Returns a clone of this function (recursive).
 		 */
 		virtual MFunction* Clone() const=0;
 		
@@ -111,6 +114,8 @@ namespace mpk
 		 * Are there any problems?
 		 * 
 		 * It needs to be reimplemented in child classes
+		 * 
+		 * \return Returns true if there are no errors (recursive).
 		 */
 		virtual bool IsOk() const=0;
 		
@@ -118,6 +123,9 @@ namespace mpk
 		 * This function is constant relativelly to this list of variables
 		 * 
 		 * It needs to be reimplemented in child classes
+		 * 
+		 * \param variables Variables respect with control the constantness (recursive).
+		 * \return Returns true if it is constant.
 		 */
 		virtual bool IsConstant(MVariablesList* variables) const=0;
 		
@@ -126,6 +134,9 @@ namespace mpk
 		 * 
 		 * If not all the variables defined in the function tree are presente in the list the function may return another tree
 		 * It needs to be reimplemented in child classes
+		 * 
+		 * \param variables Variables that are used during resolution (recursive).
+		 * \return Returns the solution respect to the variables values.
 		 */
 		virtual MFunction* Solve(MVariablesList* variables) const=0;
 		
@@ -133,13 +144,19 @@ namespace mpk
 		 * Derivate this function with respect to this variables (generally 1)
 		 * 
 		 * It needs to be reimplemented in child classes
+		 * 
+		 * \param variables Variables respect with derivate (recursive).
+		 * \return Returns the derivate of this function.
 		 */
-		virtual MFunction* Derivate(MVariablesList *) const=0;
+		virtual MFunction* Derivate(MVariablesList *variables) const=0;
 		
 		/*! GetVariablesList
 		 * Get all the variables defined in the function tree recursivelly
 		 * 
 		 * It needs to be reimplemented in child classes
+		 * 
+		 * \param list Optional pointer to an existing variable list (if NULL a new one is created).
+		 * \return Returns the variable list (if list is NULL you need to delete it at the end, if not it is equal to list).
 		 */
 		virtual MVariablesList* GetVariablesList(MVariablesList *list=NULL) const=0;
 		
@@ -147,11 +164,15 @@ namespace mpk
 		 * Return the dominium of the function as a system
 		 * 
 		 * It needs to be reimplemented in child classes
+		 * 
+		 * \param update Optional pointer to an existing system (if NULL a new one is created).
+		 * \return Returns the domain of this function (if update is NULL you need to delete it at the end, if not it is equal to update).
 		 */
 		virtual MSistem* GetDomain(MSistem *update) const=0;
 		
 		/*! GetType
-		 * Return the type of the function
+		 * 
+		 * \return Return the type of the function
 		 */
 		inline int GetType() const{
 			return m_type;
