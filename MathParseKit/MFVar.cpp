@@ -31,27 +31,27 @@ bool MFVar::IsConstant(MVariablesList *variables) const{
 	return false;
 }
 
-MFunction* MFVar::Solve(MVariablesList* variables) const const{
+MFunction* MFVar::Solve(MVariablesList* variables) const{
 	if (!variables) return Clone();
 	MVariableElement *element=variables->GetItem(m_name);
 	if (element) return new MFConst(element->GetValue());
 	return Clone();
 }
 
-MFunction* MFVar::Derivate(MVariablesList *variables) const const{
+MFunction* MFVar::Derivate(MVariablesList *variables) const{
 	if (!variables) return NULL;
 	if (variables->FindItem(m_name)==-1) return new MFConst(0.0);
 	return new MFConst(1.0);
 }
 
-MVariablesList* MFVar::GetVariablesList(MVariablesList *list) const const{
+MVariablesList* MFVar::GetVariablesList(MVariablesList *list) const{
 	if (!list) list= new MVariablesList();
 	if (list->FindItem(m_name)==-1)
 	list->Add(m_name);
 	return list;
 }
 
-MSistem* MFVar::GetDomain(MSistem *update) const const{
+MSistem* MFVar::GetDomain(MSistem *update) const{
 	if (!update) update=new MSistem();
 	return update;
 }

@@ -33,7 +33,7 @@ LIBSRC=	./MathParseKit/MFAbs.cpp	\
 	./MathParseKit/MFTan.cpp	\
 	./MathParseKit/MFTanh.cpp	\
 	./MathParseKit/MFVar.cpp	\
-	./MathParseKit/MInterpreter.cpp	\
+	./MathParseKit/MParser.cpp	\
 	./MathParseKit/MRelation.cpp	\
 	./MathParseKit/MSistem.cpp	\
 	./MathParseKit/MVariableList.cpp	\
