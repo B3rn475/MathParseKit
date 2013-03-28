@@ -56,7 +56,7 @@ MSistem* MFVar::GetDomain(MSistem *update) const{
 	return update;
 }
 
-int MFVar::GetName(wchar_t *buffer){
+int MFVar::GetName(wchar_t *buffer) const{
 	wcscpy(buffer,m_name);
 	return wcslen(m_name);
 }

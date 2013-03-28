@@ -11,10 +11,12 @@
 #include "MFunction.h"
 namespace mpk
 {
-
+	/*!MFVar
+	 * Variable element in a function
+	 */
 	class MFVar:public MFunction{
 		protected:
-			wchar_t *m_name;
+			wchar_t *m_name; /*!< Name of the variable */
 
 		public:
 		MFVar(const wchar_t *name=NULL, unsigned int len=1);
@@ -26,7 +28,24 @@ namespace mpk
 		virtual MVariablesList* GetVariablesList(MVariablesList *list=NULL) const;
 		virtual MSistem* GetDomain(MSistem *update) const;
 		virtual void Release();
-		int GetName(wchar_t *buffer);
+		/*! Get Name of the variable
+		 * 
+		 * \param buffer Destination buffer
+		 * \return Returns number of chars copied to the buffer
+		 */
+		int GetName(wchar_t *buffer) const;
+		/*! Get Name of the variable
+		 * 
+		 * \return Returns a constant pointer to the name of the variable
+		 */
+		inline const wchar_t *GetName() const{
+			return m_name;
+		};
+		/*! Get Name of the variable
+		 * 
+		 * \param buffer String containing the name of the variable
+		 * \param len Number of chars to copy
+		 */
 		void SetName(const wchar_t *buffer, unsigned int len=1);
 	};
 
