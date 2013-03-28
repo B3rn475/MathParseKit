@@ -100,8 +100,7 @@ namespace mpk
 			int m_type;
 
 		public:
-		/*! Clone
-		 * Clone This function and all the child recursively
+		/*! Clone this function and all the child recursively
 		 * 
 		 * It needs to be reimplemented in child classes
 		 * 
@@ -110,8 +109,7 @@ namespace mpk
 		 */
 		virtual MFunction* Clone() const=0;
 		
-		/*! IsOk
-		 * Are there any problems?
+		/*! Are there any problems?
 		 * 
 		 * It needs to be reimplemented in child classes
 		 * 
@@ -119,8 +117,7 @@ namespace mpk
 		 */
 		virtual bool IsOk() const=0;
 		
-		/*! IsConstant
-		 * This function is constant relativelly to this list of variables
+		/*! This function is constant relativelly to this list of variables
 		 * 
 		 * It needs to be reimplemented in child classes
 		 * 
@@ -129,8 +126,7 @@ namespace mpk
 		 */
 		virtual bool IsConstant(MVariablesList* variables) const=0;
 		
-		/*! Solve
-		 * Solve this function with respect to this variables
+		/*! Solve this function with respect to this variables
 		 * 
 		 * If not all the variables defined in the function tree are presente in the list the function may return another tree
 		 * It needs to be reimplemented in child classes
@@ -140,8 +136,7 @@ namespace mpk
 		 */
 		virtual MFunction* Solve(MVariablesList* variables) const=0;
 		
-		/*! Derivate
-		 * Derivate this function with respect to this variables (generally 1)
+		/*! Derivate this function with respect to this variables (generally 1)
 		 * 
 		 * It needs to be reimplemented in child classes
 		 * 
@@ -150,8 +145,7 @@ namespace mpk
 		 */
 		virtual MFunction* Derivate(MVariablesList *variables) const=0;
 		
-		/*! GetVariablesList
-		 * Get all the variables defined in the function tree recursivelly
+		/*! Get all the variables defined in the function tree recursivelly
 		 * 
 		 * It needs to be reimplemented in child classes
 		 * 
@@ -160,8 +154,7 @@ namespace mpk
 		 */
 		virtual MVariablesList* GetVariablesList(MVariablesList *list=NULL) const=0;
 		
-		/*! GetDomain
-		 * Return the dominium of the function as a system
+		/*! Return the dominium of the function as a system
 		 * 
 		 * It needs to be reimplemented in child classes
 		 * 
@@ -170,7 +163,7 @@ namespace mpk
 		 */
 		virtual MSistem* GetDomain(MSistem *update) const=0;
 		
-		/*! GetType
+		/*! Get the type of the function
 		 * 
 		 * \return Return the type of the function
 		 */
@@ -178,8 +171,7 @@ namespace mpk
 			return m_type;
 		};
 		
-		/*! Release
-		 * Release this function and all the children
+		/*! Release this function and all the children
 		 * 
 		 * It needs to be reimplemented in child classes
 		 */
