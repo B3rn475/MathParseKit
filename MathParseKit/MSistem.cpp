@@ -64,6 +64,15 @@ MRelation *MSistem::Item(int index){
 	return walker->relation;
 }
 
+const MRelation *MSistem::Item(int index) const{
+	if ((index>=m_count)||(index<0)) return NULL;
+	MSistemItem *walker=m_list;
+	for (int i=0;i<index;i++){
+		walker=walker->next;
+	}
+	return walker->relation;
+}
+
 int MSistem::Remove(int index){
 	if ((index>=m_count)||(index<0)) return -1;
 	MSistemItem **walker=&m_list;
