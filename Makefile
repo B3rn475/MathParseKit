@@ -41,10 +41,10 @@ LIBSRC=	./MathParseKit/MFAbs.cpp	\
 
 LIBOBJ=$(LIBSRC:.cpp=.o)
 
-install: $(LIB)
-	@echo lib Makefile - installing $(LIB)
-	@install -m 444 $(LIB) $(LIBDEST)
-
+all: $(LIB)
+	#@echo lib Makefile - installing $(LIB)
+	#@install -m 444 $(LIB) $(LIBDEST)
+	
 $(LIB): $(LIBOBJ)
 	@echo lib Makefile - archiving $(LIB)
 	@$(AR) -cvq $(LIB) $(LIBOBJ)
