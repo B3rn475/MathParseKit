@@ -63,7 +63,7 @@ MVariableElement *MVariablesList::GetItem(const wchar_t *name){
 }
 
 int MVariablesList::FindItem(const wchar_t *name){
-	if (!name) return NULL;
+	if (!name) return -1;
 	MvariablesItem *temp=m_pt;
 	for (int i=0;i<Count();i++){
 		if (!wcscmp(name,temp->link->GetName())){
