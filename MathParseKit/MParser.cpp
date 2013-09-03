@@ -321,8 +321,8 @@ bool MParser::CreateList(const wchar_t *fStr, FListElement **pt, wchar_t delimit
 		m_pos++;
 		Clean(fStr);
 		if (!ConvertElement(fStr,&(walker->func))) return false;
+		Clean(fStr);
 	}
-	Clean(fStr);
 	if (*(fStr+m_pos)==')' || *(fStr+m_pos)==','){
 		if (*(fStr+m_pos)==delimiter){
 			return true;
