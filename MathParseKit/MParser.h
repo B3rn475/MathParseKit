@@ -88,16 +88,6 @@ namespace mpk
 			 */
 
 			MFunction *ParseFunction(const wchar_t*fStr);
-			
-			/*! Prepare a string to parsing
-			 * 
-			 * Remove from the string characters that are not valid for the parser
-			 * Chars : ' '
-			 * 
-			 * \param str String that needs to be Cleaned.
-			 * \return Returns str for chaining function calls.
-			 */
-			wchar_t *Clean(wchar_t * str) const;
 
 			/*! Get the error code of the last error encountered
 			 * 
@@ -119,6 +109,15 @@ namespace mpk
 			}
 
 		protected:
+			/*! Clean the string while parsing
+			 * 
+			 * Ignores characters that are not valid for the parser
+			 * Chars : ' '
+			 * 
+			 * \param str String that needs to be Cleaned.
+			 */
+			void Clean(const wchar_t * str);
+			
 			/*! Check parentesis/brakets number and nesting
 			 * 
 			 * ...(....(...)....(...)...)... => OK

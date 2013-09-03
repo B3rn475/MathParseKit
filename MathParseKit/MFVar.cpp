@@ -18,7 +18,7 @@ MFVar::MFVar(const wchar_t *name, unsigned int len){
 	SetName(name,len);
 }
 MFunction* MFVar::Clone() const{
-	return new MFVar(m_name);
+	return new MFVar(m_name, wcslen(m_name));
 }
 
 bool MFVar::IsOk() const{

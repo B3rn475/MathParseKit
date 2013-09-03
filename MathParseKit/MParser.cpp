@@ -74,6 +74,7 @@ bool MParser::AnalizeParentesis(const wchar_t *fStr){
 }
 
 bool MParser::AnalizePlane(const wchar_t *fStr, MFunction **pt, wchar_t delimiter){
+	Clean(fStr);
 	if (wcslen((fStr+m_pos))==0){
 		error=MP_UNEXPECTED_END;
 		return false;
@@ -135,6 +136,7 @@ unsigned int MParser::IsFunction(const wchar_t *fStr){
 }
 
 bool MParser::AnalizeFunction(const wchar_t *fStr, MFunction **pt){
+	Clean(fStr);
 	if (wcslen((fStr+m_pos))==0){
 		error=MP_UNEXPECTED_END;
 		return false;
@@ -278,7 +280,7 @@ bool MParser::AnalizeFunction(const wchar_t *fStr, MFunction **pt){
 }
 
 bool MParser::AnalizeCharCoerency(const wchar_t*fStr){
-	wchar_t mask[]=L"(),.+-*/^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	wchar_t mask[]=L" (),.+-*/^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 	m_pos=wcsspn(fStr,mask);
 	if (m_pos==wcslen(fStr)) return true;
 	error=MP_UNEXPECTED_CHAR;
@@ -287,6 +289,7 @@ bool MParser::AnalizeCharCoerency(const wchar_t*fStr){
 
 
 bool MParser::CreateList(const wchar_t *fStr, FListElement **pt, wchar_t delimiter){
+	Clean(fStr);
 	(*pt)=(FListElement*)malloc(sizeof(FListElement));
 	if (*(fStr+m_pos)=='-' || *(fStr+m_pos)=='+'){
 		(*pt)->op=*(fStr+m_pos);
@@ -300,6 +303,7 @@ bool MParser::CreateList(const wchar_t *fStr, FListElement **pt, wchar_t delimit
 	walker->func=NULL;
 	walker->next=NULL;
 	if (!ConvertElement(fStr,&(walker->func))) return false;
+	Clean(fStr);
 	if (*(fStr+m_pos)==')' || *(fStr+m_pos)==','){
 		if (*(fStr+m_pos)==delimiter){
 			return true;
@@ -315,8 +319,10 @@ bool MParser::CreateList(const wchar_t *fStr, FListElement **pt, wchar_t delimit
 		walker->func=NULL;
 		walker->next=NULL;
 		m_pos++;
+		Clean(fStr);
 		if (!ConvertElement(fStr,&(walker->func))) return false;
 	}
+	Clean(fStr);
 	if (*(fStr+m_pos)==')' || *(fStr+m_pos)==','){
 		if (*(fStr+m_pos)==delimiter){
 			return true;
@@ -403,6 +409,7 @@ bool MParser::ConvertList(FListElement *pt){
 }
 
 bool MParser::ConvertElement(const wchar_t *fStr, MFunction **pt){
+	Clean(fStr);
 	if (wcslen((fStr+m_pos))==0){
 		error=MP_UNEXPECTED_END;
 		return false;
@@ -435,12 +442,9 @@ bool MParser::ConvertElement(const wchar_t *fStr, MFunction **pt){
 	}
 }
 
-wchar_t *MParser::Clean(wchar_t * str) const{
-	const wchar_t *s=L" ";
-	unsigned int pos=wcscspn(str,s);
-	while(pos!=wcslen(str)){
-		wcscpy((str+pos),(str+pos+1));
-		pos=wcscspn(str,s);
+void MParser::Clean(const wchar_t * fStr){
+	while (*(fStr+m_pos)==' ')
+	{
+		m_pos++;
 	}
-	return str;
 }
