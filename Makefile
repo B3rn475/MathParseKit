@@ -36,7 +36,7 @@ LIBSRC=	./MathParseKit/MFAbs.cpp	\
 	./MathParseKit/MParser.cpp	\
 	./MathParseKit/MRelation.cpp	\
 	./MathParseKit/MSistem.cpp	\
-	./MathParseKit/MVariableElement.cpp \
+	./MathParseKit/MVariableElement.cpp	\
 	./MathParseKit/MVariablesList.cpp
 
 LIBOBJ=$(LIBSRC:.cpp=.o)
