@@ -6,6 +6,7 @@
  */
 
 #include "MFConst.h"
+#include <sstream>
 
 using namespace mpk;
 
@@ -61,7 +62,9 @@ bool MFConst::operator<(MFConst &B)const{
 }
 
 std::wstring MFConst::ToString() const {
-	return std::to_wstring((long double)m_value);
+	std::wostringstream stream;
+	stream << m_value;
+	return stream.str();
 }
 
 void MFConst::Release(){
