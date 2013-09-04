@@ -265,11 +265,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\MVariableList.cpp"
+				RelativePath=".\MVariableElement.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MVariablesElement.cpp"
+				RelativePath=".\MVariablesList.cpp"
 				>
 			</File>
 		</Filter>
