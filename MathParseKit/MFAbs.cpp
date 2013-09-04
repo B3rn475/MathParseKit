@@ -10,6 +10,7 @@
 #include "MFConst.h"
 #include "MFMul.h"
 #include "MFDiv.h"
+#include <sstream>
 
 using namespace mpk;
 
@@ -73,6 +74,14 @@ MSistem* MFAbs::GetDomain(MSistem *update) const{
 void MFAbs::SetFn(MFunction *fn){
 	if (m_fn) m_fn->Release();
 	m_fn=fn;
+}
+
+std::wstring MFAbs::ToString() const {
+	std::wostringstream stream;
+	stream << L"abs(";
+	stream << m_fn->ToString();
+	stream << L")";
+	return stream.str();
 }
 
 void MFAbs::Release(){

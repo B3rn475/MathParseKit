@@ -12,6 +12,7 @@
 #include "MFDiv.h"
 #include "MFSin.h"
 #include "MFOpp.h"
+#include <sstream>
 
 using namespace mpk;
 
@@ -85,6 +86,14 @@ MSistem* MFCoTan::GetDomain(MSistem *update) const{
 void MFCoTan::SetArgument(MFunction *argument){
 	if (m_argument) m_argument->Release();
 	m_argument=argument;
+}
+
+std::wstring MFCoTan::ToString() const {
+	std::wostringstream stream;
+	stream << L"cotan(";
+	stream << m_argument->ToString();
+	stream << L")";
+	return stream.str();
 }
 
 void MFCoTan::Release(){

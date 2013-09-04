@@ -11,6 +11,7 @@
 #include "MFMul.h"
 #include "MFPow.h"
 #include "MFDiv.h"
+#include <sstream>
 
 using namespace mpk;
 
@@ -93,6 +94,14 @@ MSistem* MFSqrt::GetDomain(MSistem *update) const{
 void MFSqrt::SetFn(MFunction *fn){
 	if (m_fn) m_fn->Release();
 	m_fn=fn;
+}
+
+std::wstring MFSqrt::ToString() const {
+	std::wostringstream stream;
+	stream << L"sqrt(";
+	stream << m_fn->ToString();
+	stream << L")";
+	return stream.str();
 }
 
 void MFSqrt::Release(){

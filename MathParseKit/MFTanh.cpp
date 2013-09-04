@@ -11,6 +11,7 @@
 #include "MFMul.h"
 #include "MFSub.h"
 #include "MFOpp.h"
+#include <sstream>
 
 using namespace mpk;
 
@@ -82,6 +83,14 @@ MSistem* MFTanh::GetDomain(MSistem *update) const{
 void MFTanh::SetArgument(MFunction *argument){
 	if (m_argument) m_argument->Release();
 	m_argument=argument;
+}
+
+std::wstring MFTanh::ToString() const {
+	std::wostringstream stream;
+	stream << L"tanh(";
+	stream << m_argument->ToString();
+	stream << L")";
+	return stream.str();
 }
 
 void MFTanh::Release(){

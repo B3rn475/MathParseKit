@@ -60,6 +60,10 @@ bool MFConst::operator<(MFConst &B)const{
 	return (m_value<B.m_value);
 }
 
+std::wstring MFConst::ToString() const {
+	return std::to_wstring((long double)m_value);
+}
+
 void MFConst::Release(){
 	delete this;
 }

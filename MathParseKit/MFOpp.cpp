@@ -7,6 +7,7 @@
 
 #include "MFOpp.h"
 #include "MFConst.h"
+#include <sstream>
 
 using namespace mpk;
 
@@ -68,6 +69,13 @@ MSistem* MFOpp::GetDomain(MSistem *update) const{
 void MFOpp::SetFn(MFunction *fn){
 	if (m_fn) m_fn->Release();
 	m_fn=fn;
+}
+
+std::wstring MFOpp::ToString() const {
+	std::wostringstream stream;
+	stream << L"-";
+	stream << m_fn->ToString();
+	return stream.str();
 }
 
 void MFOpp::Release(){

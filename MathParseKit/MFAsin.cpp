@@ -11,6 +11,7 @@
 #include "MFPow.h"
 #include "MFSqrt.h"
 #include "MFSub.h"
+#include <sstream>
 
 using namespace mpk;
 
@@ -86,6 +87,14 @@ MSistem* MFAsin::GetDomain(MSistem *update) const{
 void MFAsin::SetArgument(MFunction *argument){
 	if (m_argument) m_argument->Release();
 	m_argument=argument;
+}
+
+std::wstring MFAsin::ToString() const {
+	std::wostringstream stream;
+	stream << L"asin(";
+	stream << m_argument->ToString();
+	stream << L")";
+	return stream.str();
 }
 
 void MFAsin::Release(){

@@ -9,6 +9,7 @@
 #include "MFConst.h"
 #include "MFDiv.h"
 #include "MFMul.h"
+#include <sstream>
 
 using namespace mpk;
 
@@ -78,6 +79,14 @@ MSistem* MFLn::GetDomain(MSistem *update) const{
 void MFLn::SetArgument(MFunction *argument){
 	if (m_argument) m_argument->Release();
 	m_argument=argument;
+}
+
+std::wstring MFLn::ToString() const {
+	std::wostringstream stream;
+	stream << L"ln(";
+	stream << m_argument->ToString();
+	stream << L")";
+	return stream.str();
 }
 
 void MFLn::Release(){

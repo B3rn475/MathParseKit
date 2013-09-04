@@ -11,6 +11,7 @@
 #include "MFMul.h"
 #include "MFAdd.h"
 #include "MFPow.h"
+#include <sstream>
 
 using namespace mpk;
 
@@ -81,6 +82,14 @@ MSistem* MFAtan::GetDomain(MSistem *update) const{
 void MFAtan::SetArgument(MFunction *argument){
 	if (m_argument) m_argument->Release();
 	m_argument=argument;
+}
+
+std::wstring MFAtan::ToString() const {
+	std::wostringstream stream;
+	stream << L"atan(";
+	stream << m_argument->ToString();
+	stream << L")";
+	return stream.str();
 }
 
 void MFAtan::Release(){

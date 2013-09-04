@@ -9,56 +9,55 @@
 #include <wctype.h>
 #include <stdio.h>
 #include <wchar.h>
+#include <algorithm>
 
 using namespace mpk;
 
 MParser::MParser(){
-	m_pos=0;
+	m_fStr = L"";
+	m_it = m_fStr.begin();
 	error=MP_OK;
 }
 
-MFunction *MParser::ParseFunction(const wchar_t*fStr){
+MFunction *MParser::ParseFunction(const wchar_t *fStr){
+	return ParseFunction((std::wstring)fStr);
+}
+
+MFunction *MParser::ParseFunction(const std::wstring &fStr){
 	MFunction *ret=NULL;
-	int len = wcslen(fStr);
-	wchar_t *fStrLower = new wchar_t[len+1];
-	for (int i=0; i<len;i++)
-	{
-		*(fStrLower+i) = towlower(*(fStr+i));
-	}
-	*(fStrLower+len)='\0';
+	m_fStr = fStr;
+	transform(
+	  m_fStr.begin(), m_fStr.end(),
+	  m_fStr.begin(),
+	  tolower);
 	error=MP_OK;
-	m_pos=0;
-	if (!AnalizeParentesis(fStrLower))
+	m_it = m_fStr.begin();
+	if (!AnalizeParentesis())
 	{
-		delete[] fStrLower;
 		return NULL;
 	}
-	m_pos=0;
-	if (!AnalizeCharCoerency(fStrLower))
+	m_it = m_fStr.begin();
+	if (!AnalizeCharCoerency())
 	{
-		delete[] fStrLower;
 		return NULL;
 	}
-	m_pos=0;
-	if (!AnalizePlane(fStrLower,&ret))
+	m_it = m_fStr.begin();
+	if (!AnalizePlane(&ret))
 	{
-		delete[] fStrLower;
 		return NULL;
 	}
-	m_pos=0;
-	delete[] fStrLower;
 	return ret;
 }
 
-bool MParser::AnalizeParentesis(const wchar_t *fStr){
-	if (!fStr){
-		if (fStr) error=MP_UNEXPECTED_END;
+bool MParser::AnalizeParentesis(){
+	if (m_fStr.length() == 0){
+		error=MP_UNEXPECTED_END;
 		return false;
 	}
 	unsigned int  par=0;
-	for (m_pos=0; m_pos<wcslen(fStr);m_pos++){
-		if ('('==*(fStr+m_pos)) par++;
-		if (')'==*(fStr+m_pos)){
+	for (; m_it<m_fStr.end();m_it++){
+		if ('('==*(m_it)) par++;
+		if (')'==*(m_it)){
 			if (par==0){
 				error=MP_UNEXPECTED_CHAR;
 				return false;
@@ -73,18 +72,18 @@ bool MParser::AnalizeParentesis(const wchar_t *fStr){
 	return true;
 }
 
-bool MParser::AnalizePlane(const wchar_t *fStr, MFunction **pt, wchar_t delimiter){
-	Clean(fStr);
-	if (wcslen((fStr+m_pos))==0){
+bool MParser::AnalizePlane(MFunction **pt, wchar_t delimiter){
+	Clean();
+	if (m_fStr.end() == m_it){
 		error=MP_UNEXPECTED_END;
 		return false;
 	}
-	if (*(fStr+m_pos)==')' || *(fStr+m_pos)==',' || *(fStr+m_pos)=='*' || *(fStr+m_pos)=='/' || *(fStr+m_pos)=='^'){
+	if (*m_it==')' || *m_it==',' || *m_it=='*' || *m_it=='/' || *m_it=='^'){
 		error=MP_UNEXPECTED_CHAR;
 		return false;
 	}
 	FListElement *fpt;
-	if (!CreateList(fStr,&fpt,delimiter)){
+	if (!CreateList(&fpt,delimiter)){
 		return false;
 	}
 	if (!ConvertList(fpt)){
@@ -100,173 +99,183 @@ bool MParser::AnalizePlane(const wchar_t *fStr, MFunction **pt, wchar_t delimite
 	return true;
 }
 
-unsigned int MParser::IsFunction(const wchar_t *fStr){
-		if (wcslen(fStr)<2) return 0;
-		if (wcsncmp(fStr,L"pi",2)==0){
-			if (wcslen(fStr)<3) return 2;
-			if (!iswalpha(*(fStr+2))) return 2;
-			return 0;
-		}
-		if (wcslen(fStr)<3) return 0;
-		if (wcsncmp(fStr,L"ln(",3)==0)return 3;
-		if (wcslen(fStr)<4) return 0;
-		if (wcsncmp(fStr,L"abs(",4)==0)return 4;
-		if (wcsncmp(fStr,L"log(",4)==0)return 4;
-		if (wcsncmp(fStr,L"sin(",4)==0)return 4;
-		if (wcsncmp(fStr,L"cos(",4)==0)return 4;
-		if (wcsncmp(fStr,L"tan(",4)==0)return 4;
-		if (wcsncmp(fStr,L"exp(",4)==0)return 4;
-		if (wcsncmp(fStr,L"pow(",4)==0)return 4;
-		if (wcslen(fStr)<5) return 0;
-		if (wcsncmp(fStr,L"sqrt(",5)==0)return 5;
-		if (wcsncmp(fStr,L"sinh(",5)==0)return 5;
-		if (wcsncmp(fStr,L"cosh(",5)==0)return 5;
-		if (wcsncmp(fStr,L"tanh(",5)==0)return 5;
-		if (wcsncmp(fStr,L"asin(",5)==0)return 5;
-		if (wcsncmp(fStr,L"acos(",5)==0)return 5;
-		if (wcsncmp(fStr,L"atan(",5)==0)return 5;
-		if (wcsncmp(fStr,L"sign(",5)==0)return 5;
-		if (wcslen(fStr)<6) return 0;
-		if (wcsncmp(fStr,L"log10(",6)==0)return 6;
-		if (wcsncmp(fStr,L"cotan(",6)==0)return 6;
-		if (wcslen(fStr)<7) return 0;
-		if (wcsncmp(fStr,L"cotanh(",7)==0)return 7;
-		if (wcsncmp(fStr,L"acotan(",7)==0)return 7;
+unsigned int MParser::IsFunction(){
+	unsigned int len = m_fStr.end() - m_it;
+	if (len < 2) return 0; // remaining chars less then 2
+	if (m_fStr.compare(m_it-m_fStr.begin(), 2, L"pi") == 0){
+		if (len < 3) return 2;
+		if (!iswalpha(*(m_it +3 ))) return 2;
 		return 0;
+	}
+	if (m_fStr.end() - m_it < 3) return 0;
+	if (m_fStr.compare(m_it-m_fStr.begin(), 3, L"ln(") == 0) return 3;
+
+	if (len < 4) return 0;
+	if (m_fStr.compare(m_it-m_fStr.begin(), 4, L"abs(") == 0) return 4;
+	if (m_fStr.compare(m_it-m_fStr.begin(), 4, L"log(") == 0) return 4;
+	if (m_fStr.compare(m_it-m_fStr.begin(), 4, L"sin(") == 0) return 4;
+	if (m_fStr.compare(m_it-m_fStr.begin(), 4, L"cos(") == 0) return 4;
+	if (m_fStr.compare(m_it-m_fStr.begin(), 4, L"tan(") == 0) return 4;
+	if (m_fStr.compare(m_it-m_fStr.begin(), 4, L"exp(") == 0) return 4;
+	if (m_fStr.compare(m_it-m_fStr.begin(), 4, L"pow(") == 0) return 4;
+
+	if (len < 5) return 0;
+	if (m_fStr.compare(m_it-m_fStr.begin(), 5, L"sqrt(") == 0) return 5;
+	if (m_fStr.compare(m_it-m_fStr.begin(), 5, L"sinh(") == 0) return 5;
+	if (m_fStr.compare(m_it-m_fStr.begin(), 5, L"cosh(") == 0) return 5;
+	if (m_fStr.compare(m_it-m_fStr.begin(), 5, L"tanh(") == 0) return 5;
+	if (m_fStr.compare(m_it-m_fStr.begin(), 5, L"asin(") == 0) return 5;
+	if (m_fStr.compare(m_it-m_fStr.begin(), 5, L"acos(") == 0) return 5;
+	if (m_fStr.compare(m_it-m_fStr.begin(), 5, L"atan(") == 0) return 5;
+	if (m_fStr.compare(m_it-m_fStr.begin(), 5, L"sign(") == 0) return 5;
+
+	if (len < 6) return 0;
+	if (m_fStr.compare(m_it-m_fStr.begin(), 6, L"log10(") == 0) return 6;
+	if (m_fStr.compare(m_it-m_fStr.begin(), 6, L"cotan(") == 0) return 6;
+
+	if (len < 7) return 0;
+	if (m_fStr.compare(m_it-m_fStr.begin(), 7, L"cotanh(") == 0) return 7;
+	if (m_fStr.compare(m_it-m_fStr.begin(), 7, L"acotan(") == 0) return 7;
+	return 0;
 }
 
-bool MParser::AnalizeFunction(const wchar_t *fStr, MFunction **pt){
-	Clean(fStr);
-	if (wcslen((fStr+m_pos))==0){
+bool MParser::AnalizeFunction(MFunction **pt){
+	Clean();
+	if (m_fStr.end() - m_it == 0){
 		error=MP_UNEXPECTED_END;
 		return false;
 	}
-	const wchar_t *temps=(fStr+m_pos);
-	unsigned int  len=IsFunction(temps);
-	if (len==0){
-		len=1;
-		while(iswalpha(*(fStr+m_pos+len))){
+	unsigned int len=IsFunction();
+	if (len == 0){
+		len = 1;
+		while(m_it + len != m_fStr.end() && iswalpha(*(m_it+len))){
 			len++;
-			if (0==wcslen((fStr+m_pos+len))){
+			if (m_fStr.end() - m_it == len){
 				break;
 			}
 		}
-		(*pt)=new MFVar((fStr+m_pos),len);
-		m_pos=m_pos+len;
+		(*pt)=new MFVar(std::wstring(m_it,m_it+len));
+		m_it += len;
+		Clean();
 		return true;
 	}else{
-		if (wcsncmp((fStr+m_pos),L"pi",2)==0){
+		if (m_fStr.compare(m_it-m_fStr.begin(), 2, L"pi") == 0){
 			(*pt)=new MFConst(2*asin(1.0));
-			m_pos+=2;
+			m_it += 2;
 			return true;
 		}else{
 			bool nelem=false;
-			if (wcsncmp((fStr+m_pos),L"log(",4)==0) nelem=true;
-			if (wcsncmp((fStr+m_pos),L"pow(",4)==0) nelem=true;
+			if (m_fStr.compare(m_it-m_fStr.begin(), 4, L"log(") == 0) nelem=true;
+			if (m_fStr.compare(m_it-m_fStr.begin(), 4, L"pow(") == 0) nelem=true;
 			
+			std::wstring str(m_it, m_it + len);
+
 			MFunction *p1=NULL;
 			MFunction *p2=NULL;
-			
-			const wchar_t *str=(fStr+m_pos);
 
 			if (nelem) {
-				m_pos+=len;
-				if (!AnalizePlane(fStr,&p1,',')) return false;
-				m_pos++;
-				if (!AnalizePlane(fStr,&p2,')')){
+				m_it += len;
+				Clean();
+				if (!AnalizePlane(&p1,',')) return false;
+				m_it++;
+				Clean();
+				if (!AnalizePlane(&p2,')')){
 					p1->Release();
 					return false;
 				}
-				m_pos++;
+				m_it++;
+				Clean();
 			}else{
-				m_pos+=len;
-				if (!AnalizePlane(fStr,&p1,')')) return false;
-				m_pos++;
+				m_it += len;
+				Clean();
+				if (!AnalizePlane(&p1,')')) return false;
+				m_it++;
+				Clean();
 			}
 
-			if (wcsncmp(str,L"ln(",3)==0){
+			if (str.compare(L"ln(") == 0){
 				(*pt)=(MFunction*) new MFLn(p1);
 				if (p1) p1->Release();
 				return true;
-			}else if (wcsncmp(str,L"abs(",4)==0){
+			}else if (str.compare(L"abs(") == 0){
 				(*pt)=(MFunction*) new  MFAbs(p1);
 				if (p1) p1->Release();
 				return true;
-			}else if (wcsncmp(str,L"log(",4)==0){
+			}else if (str.compare(L"log(") == 0){
 				(*pt)=(MFunction*) new  MFLog(p1,p2);
 				if (p1) p1->Release();
 				if (p2) p2->Release();
 				return true;
-			}else if (wcsncmp(str,L"sin(",4)==0){
+			}else if (str.compare(L"sin(") == 0){
 				(*pt)=(MFunction*) new  MFSin(p1);
 				if (p1) p1->Release();
 				return true;
-			}else if (wcsncmp(str,L"cos(",4)==0){
+			}else if (str.compare(L"cos(") == 0){
 				(*pt)=(MFunction*) new  MFCos(p1);
 				if (p1) p1->Release();
 				return true;
-			}else if (wcsncmp(str,L"tan(",4)==0){
+			}else if (str.compare(L"tan(") == 0){
 				(*pt)=(MFunction*) new  MFTan(p1);
 				if (p1) p1->Release();
 				return true;
-			}else if (wcsncmp(str,L"exp(",4)==0){
+			}else if (str.compare(L"exp(") == 0){
 				(*pt)=(MFunction*) new  MFExp(p1);
 				if (p1) p1->Release();
 				return true;
-			}else if (wcsncmp(str,L"pow(",4)==0){
+			}else if (str.compare(L"pow(") == 0){
 				(*pt)=(MFunction*) new  MFPow(p1,p2);
 				if (p1) p1->Release();
 				if (p2)	p2->Release();
 				return true;
-			}else if (wcsncmp(str,L"sqrt(",4)==0){
+			}else if (str.compare(L"sqrt(") == 0){
 				(*pt)=(MFunction*) new  MFSqrt(p1);
 				if (p1) p1->Release();
 				if (p2)	p2->Release();
 				return true;
-			}else if (wcsncmp(str,L"cosh(",4)==0){
+			}else if (str.compare(L"cosh(") == 0){
 				(*pt)=(MFunction*) new  MFCosh(p1);
 				if (p1) p1->Release();
 				if (p2)	p2->Release();
 				return true;
-			}else if (wcsncmp(str,L"sinh(",4)==0){
+			}else if (str.compare(L"sinh(") == 0){
 				(*pt)=(MFunction*) new  MFSinh(p1);
 				if (p1) p1->Release();
 				if (p2)	p2->Release();
 				return true;
-			}else if (wcsncmp(str,L"tanh(",4)==0){
+			}else if (str.compare(L"tanh(") == 0){
 				(*pt)=(MFunction*) new  MFTanh(p1);
 				if (p1) p1->Release();
 				if (p2)	p2->Release();
 				return true;
-			}else if (wcsncmp(str,L"asin(",5)==0){
+			}else if (str.compare(L"asin(") == 0){
 				(*pt)=(MFunction*) new  MFAsin(p1);
 				if (p1) p1->Release();
 				return true;
-			}else if (wcsncmp(str,L"acos(",5)==0){
+			}else if (str.compare(L"acos(") == 0){
 				(*pt)=(MFunction*) new  MFAcos(p1);
 				if (p1) p1->Release();
 				return true;
-			}else if (wcsncmp(str,L"atan(",5)==0){
+			}else if (str.compare(L"atan(") == 0){
 				(*pt)=(MFunction*) new  MFAtan(p1);
 				if (p1) p1->Release();
 				return true;
-			}else if (wcsncmp(str,L"sign(",5)==0){
+			}else if (str.compare(L"sign(") == 0){
 				(*pt)=(MFunction*) new  MFSign(p1);
 				if (p1) p1->Release();
 				return true;
-			}else if (wcsncmp(str,L"log10(",6)==0){
+			}else if (str.compare(L"log10(") == 0){
 				(*pt)=(MFunction*) new  MFLog10(p1);
 				if (p1) p1->Release();
 				return true;
-			}else if (wcsncmp(str,L"cotan(",6)==0){
+			}else if (str.compare(L"cotan(") == 0){
 				(*pt)=(MFunction*) new  MFCoTan(p1);
 				if (p1) p1->Release();
 				return true;
-			}else if (wcsncmp(str,L"cotanh(",6)==0){
+			}else if (str.compare(L"cotanh(") == 0){
 				(*pt)=(MFunction*) new  MFCoTanh(p1);
 				if (p1) p1->Release();
 				return true;
-			}else if (wcsncmp(str,L"acotan(",7)==0){
+			}else if (str.compare(L"acotan(") == 0){
 				(*pt)=(MFunction*) new  MFAcotan(p1);
 				if (p1) p1->Release();
 				return true;
@@ -279,59 +288,60 @@ bool MParser::AnalizeFunction(const wchar_t *fStr, MFunction **pt){
 	}
 }
 
-bool MParser::AnalizeCharCoerency(const wchar_t*fStr){
+bool MParser::AnalizeCharCoerency(){
 	wchar_t mask[]=L" (),.+-*/^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-	m_pos=wcsspn(fStr,mask);
-	if (m_pos==wcslen(fStr)) return true;
+	int pos = wcsspn(m_fStr.c_str(),mask);
+	if (pos==wcslen(m_fStr.c_str())) return true;
+	m_it = m_fStr.begin() + pos;
 	error=MP_UNEXPECTED_CHAR;
 	return false;
 }
 
 
-bool MParser::CreateList(const wchar_t *fStr, FListElement **pt, wchar_t delimiter){
-	Clean(fStr);
-	(*pt)=(FListElement*)malloc(sizeof(FListElement));
-	if (*(fStr+m_pos)=='-' || *(fStr+m_pos)=='+'){
-		(*pt)->op=*(fStr+m_pos);
-		m_pos++;
-		if (wcslen((fStr+m_pos))==0){
-		error=MP_UNEXPECTED_END;
-		return false;
-	}
+bool MParser::CreateList(FListElement **pt, wchar_t delimiter){
+	Clean();
+	(*pt) = (FListElement*)malloc(sizeof(FListElement));
+	if (m_it != m_fStr.end() && (*m_it == '-' || *m_it == '+')){
+		(*pt)->op = *m_it;
+		m_it++;
+		if (m_fStr.end() - m_it == 0){
+			error=MP_UNEXPECTED_END;
+			return false;
+		}
 	}else (*pt)->op='+';
-	FListElement *walker=(*pt);
-	walker->func=NULL;
-	walker->next=NULL;
-	if (!ConvertElement(fStr,&(walker->func))) return false;
-	Clean(fStr);
-	if (*(fStr+m_pos)==')' || *(fStr+m_pos)==','){
-		if (*(fStr+m_pos)==delimiter){
+	FListElement *walker = (*pt);
+	walker->func = NULL;
+	walker->next = NULL;
+	if (!ConvertElement(&(walker->func))) return false;
+	Clean();
+	if (m_it != m_fStr.end() && (*m_it == ')' || *m_it == ',')){
+		if (*m_it == delimiter){
 			return true;
 		}else{
-			error=MP_UNEXPECTED_CHAR;
+			error = MP_UNEXPECTED_CHAR;
 			return false;
 		}
 	}
-	while (*(fStr+m_pos)=='+' || *(fStr+m_pos)=='-' || *(fStr+m_pos)=='*' || *(fStr+m_pos)=='/' || *(fStr+m_pos)=='^'){
-		walker->next=(FListElement*)malloc(sizeof(FListElement));
-		walker=walker->next;
-		walker->op=*(fStr+m_pos);
-		walker->func=NULL;
-		walker->next=NULL;
-		m_pos++;
-		Clean(fStr);
-		if (!ConvertElement(fStr,&(walker->func))) return false;
-		Clean(fStr);
+	while (m_it != m_fStr.end() && (*m_it == '+' || *m_it == '-' || *m_it == '*' || *m_it == '/' || *m_it == '^')){
+		walker->next = (FListElement*)malloc(sizeof(FListElement));
+		walker = walker->next;
+		walker->op = *m_it;
+		walker->func = NULL;
+		walker->next = NULL;
+		m_it++;
+		Clean();
+		if (!ConvertElement(&(walker->func))) return false;
+		Clean();
 	}
-	if (*(fStr+m_pos)==')' || *(fStr+m_pos)==','){
-		if (*(fStr+m_pos)==delimiter){
+	if (m_it != m_fStr.end() && (*m_it == ')' || *m_it == ',')){
+		if (*m_it == delimiter){
 			return true;
 		}else{
-			error=MP_UNEXPECTED_CHAR;
+			error = MP_UNEXPECTED_CHAR;
 			return false;
 		}
 	}
-	if (wcslen(fStr)==m_pos){
+	if (m_it == m_fStr.end()){
 		return true;
 	}
 	error=MP_UNEXPECTED_CHAR;
@@ -342,64 +352,64 @@ bool MParser::ConvertList(FListElement *pt){
 	if (!pt){
 		return false;
 	}
-	FListElement *tp=pt;
+	FListElement *tp = pt;
 	while (tp->next){
-		if(tp->next->op=='^'){
-			FListElement *temp=tp->next;
-			tp->next=tp->next->next;
-			MFPow *ftemp= new MFPow();
+		if(tp->next->op == '^'){
+			FListElement *temp = tp->next;
+			tp->next = tp->next->next;
+			MFPow *ftemp = new MFPow();
 			ftemp->SetBase(tp->func);
 			ftemp->SetExponent(temp->func);
-			tp->func=(MFunction*)ftemp;
+			tp->func = (MFunction*)ftemp;
 			free(temp);
 		}else{
-			tp=tp->next;
+			tp = tp->next;
 		}
 	}
 	tp=pt;
 	while (tp->next){
-		if(tp->next->op=='*'){
-			FListElement *temp=tp->next;
-			tp->next=tp->next->next;
-			MFMul *ftemp= new MFMul();
+		if(tp->next->op == '*'){
+			FListElement *temp = tp->next;
+			tp->next = tp->next->next;
+			MFMul *ftemp = new MFMul();
 			ftemp->SetLhs(tp->func);
 			ftemp->SetRhs(temp->func);
-			tp->func=(MFunction*)ftemp;
+			tp->func = (MFunction*)ftemp;
 			free(temp);
 		}else if (tp->next->op=='/'){
-			FListElement *temp=tp->next;
-			tp->next=tp->next->next;
-			MFDiv *ftemp= new MFDiv();
+			FListElement *temp = tp->next;
+			tp->next = tp->next->next;
+			MFDiv *ftemp = new MFDiv();
 			ftemp->SetNum(tp->func);
 			ftemp->SetDenum(temp->func);
-			tp->func=(MFunction*)ftemp;
+			tp->func = (MFunction*)ftemp;
 			free(temp);
 		}else{
-			tp=tp->next;
+			tp = tp->next;
 		}
 	}
 	tp=pt;
-	if (tp->op=='-'){
-		MFOpp *fn=new MFOpp();
+	if (tp->op == '-'){
+		MFOpp *fn = new MFOpp();
 		fn->SetFn(tp->func);
-		tp->func= fn;
+		tp->func = fn;
 	}
 	while (tp->next){
-		if (tp->next->op=='+'){
-			FListElement *temp=tp->next;
-			tp->next=tp->next->next;
-			MFAdd *ftemp= new MFAdd();
+		if (tp->next->op == '+'){
+			FListElement *temp = tp->next;
+			tp->next = tp->next->next;
+			MFAdd *ftemp = new MFAdd();
 			ftemp->SetLhs(tp->func);
 			ftemp->SetRhs(temp->func);
-			tp->func=(MFunction*)ftemp;
+			tp->func = (MFunction*)ftemp;
 			free(temp);
-		}else if (tp->next->op=='-'){
-			FListElement *temp=tp->next;
-			tp->next=tp->next->next;
-			MFSub *ftemp= new MFSub();
+		}else if (tp->next->op == '-'){
+			FListElement *temp = tp->next;
+			tp->next = tp->next->next;
+			MFSub *ftemp = new MFSub();
 			ftemp->SetLhs(tp->func);
 			ftemp->SetRhs(temp->func);
-			tp->func=(MFunction*)ftemp;
+			tp->func = (MFunction*)ftemp;
 			free(temp);
 		}else{
 			return false;
@@ -408,43 +418,43 @@ bool MParser::ConvertList(FListElement *pt){
 	return true;
 }
 
-bool MParser::ConvertElement(const wchar_t *fStr, MFunction **pt){
-	Clean(fStr);
-	if (wcslen((fStr+m_pos))==0){
-		error=MP_UNEXPECTED_END;
+bool MParser::ConvertElement(MFunction **pt){
+	Clean();
+	if (m_it == m_fStr.end()){
+		error = MP_UNEXPECTED_END;
 		return false;
 	}
-	if (*(fStr+m_pos)=='+' || *(fStr+m_pos)=='-' || *(fStr+m_pos)=='/' || *(fStr+m_pos)=='*' || *(fStr+m_pos)=='^' || *(fStr+m_pos)==')'){
-		error=MP_UNEXPECTED_CHAR;
+	if (*m_it == '+' || *m_it == '-' || *m_it == '/' || *m_it == '*' || *m_it == '^' || *m_it == ')'){
+		error = MP_UNEXPECTED_CHAR;
 		return false;
 	}
-	if (iswdigit(*(fStr+m_pos))){
+	if (iswdigit(*m_it)){
 		double value;
-		swscanf((fStr+m_pos),L"%Lf",&value);
-		while(iswdigit(*(fStr+m_pos))||*(fStr+m_pos)=='.'){
-			m_pos++;
+		swscanf(std::wstring(m_it, m_fStr.end()).c_str(),L"%Lf",&value);
+		while(m_it != m_fStr.end() && (iswdigit(*m_it) || *m_it=='.')){
+			m_it++;
 		}
 		*pt = new MFConst(value);
 		return true;
 	}else{
-		if (*(fStr+m_pos)=='('){
-			m_pos++;
-			if (wcslen((fStr+m_pos))==0){
+		if (*m_it == '('){
+			m_it++;
+			if (m_it == m_fStr.end()){
 				error=MP_UNEXPECTED_END;
 				return false;
 			}
-			if (!AnalizePlane(fStr,pt,')')) return false;
-			m_pos++;
+			if (!AnalizePlane(pt,')')) return false;
+			m_it++;
 			return true;
 		}
-		if (AnalizeFunction(fStr,pt)) return true;
+		if (AnalizeFunction(pt)) return true;
 		return false;
 	}
 }
 
-void MParser::Clean(const wchar_t * fStr){
-	while (*(fStr+m_pos)==' ')
+void MParser::Clean(){
+	while (m_it != m_fStr.end() && *m_it == ' ')
 	{
-		m_pos++;
+		m_it++;
 	}
 }

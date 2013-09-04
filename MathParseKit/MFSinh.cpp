@@ -9,6 +9,7 @@
 #include "MFConst.h"
 #include "MFCos.h"
 #include "MFMul.h"
+#include <sstream>
 
 using namespace mpk;
 
@@ -72,6 +73,14 @@ MSistem* MFSinh::GetDomain(MSistem *update) const{
 void MFSinh::SetArgument(MFunction *argument){
 	if (m_argument) m_argument->Release();
 	m_argument=argument;
+}
+
+std::wstring MFSinh::ToString() const {
+	std::wostringstream stream;
+	stream << L"sinh(";
+	stream << m_argument->ToString();
+	stream << L")";
+	return stream.str();
 }
 
 void MFSinh::Release(){

@@ -75,8 +75,9 @@ namespace mpk
 	 */
 	class MParser{
 		protected:
-			unsigned int m_pos; /*!< Last error position, used as internal "walker" during parsing */
+			std::wstring::iterator m_it; /*!< Last error position, used as internal "walker" during parsing */
 			int error; /*!< Last error code */
+			std::wstring m_fStr;
 
 		public:
 			MParser();
@@ -86,8 +87,14 @@ namespace mpk
 			 * \param fStr A string containing a function to parse
 			 * \return Pointer to the root element of the function.
 			 */
-
 			MFunction *ParseFunction(const wchar_t*fStr);
+
+			/*! Parse a string
+			 * 
+			 * \param fStr A string containing a function to parse
+			 * \return Pointer to the root element of the function.
+			 */
+			MFunction *ParseFunction(const std::wstring &fStr);
 
 			/*! Get the error code of the last error encountered
 			 * 
@@ -105,7 +112,7 @@ namespace mpk
 			 */
 			inline int GetErrorPosition() const
 			{
-				return m_pos;
+				return m_it - m_fStr.begin();
 			}
 
 		protected:
@@ -116,7 +123,7 @@ namespace mpk
 			 * 
 			 * \param str String that needs to be Cleaned.
 			 */
-			void Clean(const wchar_t * str);
+			void Clean();
 			
 			/*! Check parentesis/brakets number and nesting
 			 * 
@@ -127,7 +134,7 @@ namespace mpk
 			 * \param fStr String to check.
 			 * \return Returns Test passed without errors.
 			 */
-			bool AnalizeParentesis(const wchar_t *fStr);
+			bool AnalizeParentesis();
 
 			/*! Analize a sequence of chars as a matematical function
 			 * 
@@ -135,7 +142,7 @@ namespace mpk
 			 * \param fStr String to check.
 			 * \return Returns True if no Errors.
 			 */
-			bool AnalizePlane(const wchar_t *fStr, MFunction **pt, wchar_t delimiter = ')');
+			bool AnalizePlane(MFunction **pt, wchar_t delimiter = ')');
 			
 			/*! Analize a sequence of chars that can be a function or a variable
 			 * 
@@ -146,7 +153,7 @@ namespace mpk
 			 * \return Returns number of chars composing the function name.
 			 */
 
-			unsigned int IsFunction(const wchar_t *fStr);
+			unsigned int IsFunction();
 			
 			/*! Analize a sequence of chars that can be a function or a variable
 			 * 
@@ -154,7 +161,7 @@ namespace mpk
 			 * \param fStr String to check.
 			 * \return Returns True if no Errors.
 			 */
-			bool AnalizeFunction(const wchar_t *fStr, MFunction **pt);
+			bool AnalizeFunction(MFunction **pt);
 			
 			/*! Check if all chars are valid
 			 * 
@@ -163,7 +170,7 @@ namespace mpk
 			 * \param fStr String to check.
 			 * \return Returns Test passed without errors.
 			 */
-			bool AnalizeCharCoerency(const wchar_t *fStr);
+			bool AnalizeCharCoerency();
 
 			/*! Analize a sequence of chars that form a sequence of elements and operators
 			 * 
@@ -171,7 +178,7 @@ namespace mpk
 			 * \param fStr String to check.
 			 * \return Returns True if no Errors.
 			 */
-			bool CreateList(const wchar_t *fStr, FListElement **pt, wchar_t delimiter);
+			bool CreateList(FListElement **pt, wchar_t delimiter);
 
 			/*! Convert a list of FListElements in a tree
 			 * 
@@ -188,7 +195,7 @@ namespace mpk
 			 * \param fStr String to check.
 			 * \return Returns True if no Errors.
 			 */
-			bool ConvertElement(const wchar_t *fStr, MFunction **pt);
+			bool ConvertElement(MFunction **pt);
 	};
 }
 #endif

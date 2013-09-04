@@ -83,6 +83,7 @@ namespace mpk
 
 #include <math.h>
 #include <stdlib.h>
+#include <string>
 
 namespace mpk
 {
@@ -154,6 +155,12 @@ namespace mpk
 		 */
 		virtual MVariablesList* GetVariablesList(MVariablesList *list=NULL) const=0;
 		
+		/*! Return the function as a string
+		 *
+		 * \Return function as a string
+		 */
+		virtual std::wstring ToString() const=0;
+
 		/*! Return the dominium of the function as a system
 		 * 
 		 * It needs to be reimplemented in child classes

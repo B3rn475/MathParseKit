@@ -12,6 +12,7 @@
 #include "MFAdd.h"
 #include "MFLn.h"
 #include "MFSub.h"
+#include <sstream>
 
 using namespace mpk;
 
@@ -138,6 +139,24 @@ void MFPow::SetBase(MFunction *base){
 void MFPow::SetExponent(MFunction *exponent){
 	if (m_exponent) m_exponent->Release();
 	m_exponent=exponent;
+}
+
+std::wstring MFPow::ToString() const {
+	std::wostringstream stream;
+	bool parentesis = m_base->GetType() == MF_ADD || m_base->GetType() == MF_SUB || m_base->GetType() == MF_MUL || m_base->GetType() == MF_DIV;
+	if (parentesis)
+		stream << "(";
+	stream << m_base->ToString();
+	if (parentesis)
+		stream << ")";
+	stream << L"^";
+	parentesis = m_exponent->GetType() == MF_ADD || m_exponent->GetType() == MF_SUB || m_exponent->GetType() == MF_MUL || m_exponent->GetType() == MF_DIV;
+	if (parentesis)
+		stream << "(";
+	stream << m_exponent->ToString();
+	if (parentesis)
+		stream << ")";
+	return stream.str();
 }
 
 void MFPow::Release(){

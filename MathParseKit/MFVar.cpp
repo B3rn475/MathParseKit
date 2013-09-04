@@ -14,15 +14,20 @@ using namespace mpk;
 
 MFVar::MFVar(const wchar_t *name, unsigned int len){
 	m_type=MF_VAR;
-	m_name=NULL;
 	SetName(name,len);
 }
+
+MFVar::MFVar(const std::wstring name){
+	m_type=MF_VAR;
+	SetName(name);
+}
+
 MFunction* MFVar::Clone() const{
-	return new MFVar(m_name, wcslen(m_name));
+	return new MFVar(m_name);
 }
 
 bool MFVar::IsOk() const{
-	if (m_name) return true;
+	if (m_name.length() > 0) return true;
 	return false;
 }
 
@@ -56,30 +61,22 @@ MSistem* MFVar::GetDomain(MSistem *update) const{
 	return update;
 }
 
-int MFVar::GetName(wchar_t *buffer) const{
-	wcscpy(buffer,m_name);
-	return wcslen(m_name);
+void MFVar::SetName(const wchar_t *buffer,unsigned int len){
+	wchar_t *tName;
+	tName=new wchar_t[len+1];
+	wcsncpy(tName, buffer, len);
+	m_name = tName;
+	free(tName);
 }
 
-void MFVar::SetName(const wchar_t *buffer,unsigned int len){
-	if (!buffer){
-		if (m_name) free(m_name);
-		m_name=NULL;
-		return;
-	};
-	if (m_name){
-		m_name=(wchar_t*)realloc((void*)m_name,(len+1)*sizeof(wchar_t));
-	}else{
-		m_name=(wchar_t*)malloc((len+1)*sizeof(wchar_t));
-	}
-	for (unsigned int i=0; i<len; i++)
-	{
-		*(m_name+i) = *(buffer+i);
-	}
-	*(m_name+len) = L'\0';
+void MFVar::SetName(const std::wstring name){
+	m_name = name;
+}
+
+std::wstring MFVar::ToString() const {
+	return m_name;
 }
 
 void MFVar::Release(){
-	if (m_name)	free(m_name);
 	delete this;
 }

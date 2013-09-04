@@ -94,8 +94,8 @@
     <ClCompile Include="MParser.cpp" />
     <ClCompile Include="MRelation.cpp" />
     <ClCompile Include="MSistem.cpp" />
-    <ClCompile Include="MVariableList.cpp" />
-    <ClCompile Include="MVariablesElement.cpp" />
+    <ClCompile Include="MVariablesList.cpp" />
+    <ClCompile Include="MVariableElement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MFAbs.h" />

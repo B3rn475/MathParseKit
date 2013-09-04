@@ -9,6 +9,7 @@
 #include "MFAdd.h"
 #include "MFOpp.h"
 #include "MFConst.h"
+#include <sstream>
 
 using namespace mpk;
 
@@ -112,6 +113,24 @@ void MFMul::SetLhs(MFunction *lhs){
 void MFMul::SetRhs(MFunction *rhs){
 	if (m_rhs) m_rhs->Release();
 	m_rhs=rhs;
+}
+
+std::wstring MFMul::ToString() const {
+	std::wostringstream stream;
+	bool parentesis = m_lhs->GetType() == MF_ADD || m_lhs->GetType() == MF_SUB;
+	if (parentesis)
+		stream << "(";
+	stream << m_lhs->ToString();
+	if (parentesis)
+		stream << ")";
+	stream << L"*";
+	parentesis = m_rhs->GetType() == MF_ADD || m_rhs->GetType() == MF_SUB;
+	if (parentesis)
+		stream << "(";
+	stream << m_rhs->ToString();
+	if (parentesis)
+		stream << ")";
+	return stream.str();
 }
 
 void MFMul::Release(){

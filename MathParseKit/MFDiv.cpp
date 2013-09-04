@@ -11,6 +11,7 @@
 #include "MFOpp.h"
 #include "MFSub.h"
 #include "MFConst.h"
+#include <sstream>
 
 using namespace mpk;
 
@@ -133,6 +134,24 @@ void MFDiv::SetNum(MFunction *num){
 void MFDiv::SetDenum(MFunction *denum){
 	if (m_denum) m_denum->Release();
 	m_denum=denum;
+}
+
+std::wstring MFDiv::ToString() const {
+	std::wostringstream stream;
+	bool parentesis = m_num->GetType() == MF_ADD || m_num->GetType() == MF_SUB;
+	if (parentesis)
+		stream << "(";
+	stream << m_num->ToString();
+	if (parentesis)
+		stream << ")";
+	stream << L"/";
+	parentesis = m_denum->GetType() == MF_ADD || m_denum->GetType() == MF_SUB;
+	if (parentesis)
+		stream << "(";
+	stream << m_denum->ToString();
+	if (parentesis)
+		stream << ")";
+	return stream.str();
 }
 
 void MFDiv::Release(){

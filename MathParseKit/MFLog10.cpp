@@ -9,6 +9,7 @@
 #include "MFConst.h"
 #include "MFMul.h"
 #include "MFDiv.h"
+#include <sstream>
 
 using namespace mpk;
 
@@ -81,6 +82,15 @@ void MFLog10::SetArgument(MFunction *argument){
 	if (m_argument) m_argument->Release();
 	m_argument=argument;
 }
+
+std::wstring MFLog10::ToString() const {
+	std::wostringstream stream;
+	stream << L"log10(";
+	stream << m_argument->ToString();
+	stream << L")";
+	return stream.str();
+}
+
 
 void MFLog10::Release(){
 	if (m_argument) m_argument->Release();

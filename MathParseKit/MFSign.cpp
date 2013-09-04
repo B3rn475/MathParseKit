@@ -10,6 +10,7 @@
 #include "MFConst.h"
 #include "MFMul.h"
 #include "MFDiv.h"
+#include <sstream>
 
 using namespace mpk;
 
@@ -71,6 +72,14 @@ MSistem* MFSign::GetDomain(MSistem *update) const{
 void MFSign::SetFn(MFunction *fn){
 	if (m_fn) m_fn->Release();
 	m_fn=fn;
+}
+
+std::wstring MFSign::ToString() const {
+	std::wostringstream stream;
+	stream << L"sign(";
+	stream << m_fn->ToString();
+	stream << L")";
+	return stream.str();
 }
 
 void MFSign::Release(){

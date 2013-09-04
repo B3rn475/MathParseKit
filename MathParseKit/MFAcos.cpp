@@ -12,6 +12,7 @@
 #include "MFSqrt.h"
 #include "MFPow.h"
 #include "MFSub.h"
+#include <sstream>
 
 using namespace mpk;
 
@@ -89,6 +90,14 @@ MSistem* MFAcos::GetDomain(MSistem *update) const{
 void MFAcos::SetArgument(MFunction *argument){
 	if (m_argument) m_argument->Release();
 	m_argument=argument;
+}
+
+std::wstring MFAcos::ToString() const {
+	std::wostringstream stream;
+	stream << L"acos(";
+	stream << m_argument->ToString();
+	stream << L")";
+	return stream.str();
 }
 
 void MFAcos::Release(){

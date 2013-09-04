@@ -10,6 +10,7 @@
 #include "MFOpp.h"
 #include "MFMul.h"
 #include "MFSin.h"
+#include <sstream>
 
 using namespace mpk;
 
@@ -75,6 +76,14 @@ MSistem* MFCos::GetDomain(MSistem *update) const{
 void MFCos::SetArgument(MFunction *argument){
 	if (m_argument) m_argument->Release();
 	m_argument=argument;
+}
+
+std::wstring MFCos::ToString() const {
+	std::wostringstream stream;
+	stream << L"cos(";
+	stream << m_argument->ToString();
+	stream << L")";
+	return stream.str();
 }
 
 void MFCos::Release(){

@@ -16,29 +16,25 @@ namespace mpk
 	 */
 	class MFVar:public MFunction{
 		protected:
-			wchar_t *m_name; /*!< Name of the variable */
+			std::wstring m_name; /*!< Name of the variable */
 
 		public:
 		MFVar(const wchar_t *name=NULL, unsigned int len=1);
+		MFVar(const std::wstring name);
 		virtual MFunction* Clone() const;
 		virtual bool IsOk() const;
 		virtual bool IsConstant(MVariablesList* variables) const;
 		virtual MFunction* Solve(MVariablesList* variables) const;
 		virtual MFunction* Derivate(MVariablesList *variables) const;
 		virtual MVariablesList* GetVariablesList(MVariablesList *list=NULL) const;
+		virtual std::wstring ToString() const;
 		virtual MSistem* GetDomain(MSistem *update) const;
 		virtual void Release();
 		/*! Get Name of the variable
 		 * 
-		 * \param buffer Destination buffer
-		 * \return Returns number of chars copied to the buffer
+		 * \return Returns a constant reference to the name of the variable
 		 */
-		int GetName(wchar_t *buffer) const;
-		/*! Get Name of the variable
-		 * 
-		 * \return Returns a constant pointer to the name of the variable
-		 */
-		inline const wchar_t *GetName() const{
+		inline const std::wstring &GetName() const{
 			return m_name;
 		};
 		/*! Get Name of the variable
@@ -47,6 +43,12 @@ namespace mpk
 		 * \param len Number of chars to copy
 		 */
 		void SetName(const wchar_t *buffer, unsigned int len=1);
+		/*! Get Name of the variable
+		 * 
+		 * \param String containing the name of the variable
+		 * \param len Number of chars to copy
+		 */
+		void SetName(const std::wstring name);
 	};
 
 }

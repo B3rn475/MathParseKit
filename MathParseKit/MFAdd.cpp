@@ -7,6 +7,7 @@
 
 #include "MFAdd.h"
 #include "MFConst.h"
+#include <sstream>
 
 using namespace mpk;
 
@@ -98,6 +99,14 @@ void MFAdd::SetLhs(MFunction *lhs){
 void MFAdd::SetRhs(MFunction *rhs){
 	if (m_rhs) m_rhs->Release();
 	m_rhs=rhs;
+}
+
+std::wstring MFAdd::ToString() const {
+	std::wostringstream stream;
+	stream << m_lhs->ToString();
+	stream << L"+";
+	stream << m_rhs->ToString();
+	return stream.str();
 }
 
 void MFAdd::Release(){

@@ -8,6 +8,7 @@
 #include "MFExp.h"
 #include "MFConst.h"
 #include "MFMul.h"
+#include <sstream>
 
 using namespace mpk;
 
@@ -69,6 +70,14 @@ MSistem* MFExp::GetDomain(MSistem *update) const{
 void MFExp::SetExponent(MFunction *exponent){
 	if (m_exponent) m_exponent->Release();
 	m_exponent=exponent;
+}
+
+std::wstring MFExp::ToString() const {
+	std::wostringstream stream;
+	stream << L"exp(";
+	stream << m_exponent->ToString();
+	stream << L")";
+	return stream.str();
 }
 
 void MFExp::Release(){
