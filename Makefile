@@ -2,42 +2,45 @@
 # File:  Makefile (for library)
 #
 CC=g++
-CFLAGS=-lm
+INC1=./MathParseKit/include
+INCDIRS= -I${INC1}
+LDFLAGS=-lm
+CFLAGS=${INCDIRS}
 LIB=MathParseKit.a
 LIBDEST=./
 
-LIBSRC=	./MathParseKit/MFAbs.cpp	\
-	./MathParseKit/MFAcos.cpp	\
-	./MathParseKit/MFAcotan.cpp	\
-	./MathParseKit/MFAdd.cpp	\
-	./MathParseKit/MFAsin.cpp	\
-	./MathParseKit/MFAtan.cpp	\
-	./MathParseKit/MFConst.cpp	\
-	./MathParseKit/MFCos.cpp	\
-	./MathParseKit/MFCosh.cpp	\
-	./MathParseKit/MFCoTan.cpp	\
-	./MathParseKit/MFCoTanh.cpp	\
-	./MathParseKit/MFDiv.cpp	\
-	./MathParseKit/MFExp.cpp	\
-	./MathParseKit/MFLn.cpp	\
-	./MathParseKit/MFLog10.cpp	\
-	./MathParseKit/MFLog.cpp	\
-	./MathParseKit/MFMul.cpp	\
-	./MathParseKit/MFOpp.cpp	\
-	./MathParseKit/MFPow.cpp	\
-	./MathParseKit/MFSign.cpp	\
-	./MathParseKit/MFSin.cpp	\
-	./MathParseKit/MFSinh.cpp	\
-	./MathParseKit/MFSqrt.cpp	\
-	./MathParseKit/MFSub.cpp	\
-	./MathParseKit/MFTan.cpp	\
-	./MathParseKit/MFTanh.cpp	\
-	./MathParseKit/MFVar.cpp	\
-	./MathParseKit/MParser.cpp	\
-	./MathParseKit/MRelation.cpp	\
-	./MathParseKit/MSistem.cpp	\
-	./MathParseKit/MVariableElement.cpp	\
-	./MathParseKit/MVariablesList.cpp
+LIBSRC=	./MathParseKit/src/MFAbs.cpp	\
+	./MathParseKit/src/MFAcos.cpp	\
+	./MathParseKit/src/MFAcotan.cpp	\
+	./MathParseKit/src/MFAdd.cpp	\
+	./MathParseKit/src/MFAsin.cpp	\
+	./MathParseKit/src/MFAtan.cpp	\
+	./MathParseKit/src/MFConst.cpp	\
+	./MathParseKit/src/MFCos.cpp	\
+	./MathParseKit/src/MFCosh.cpp	\
+	./MathParseKit/src/MFCoTan.cpp	\
+	./MathParseKit/src/MFCoTanh.cpp	\
+	./MathParseKit/src/MFDiv.cpp	\
+	./MathParseKit/src/MFExp.cpp	\
+	./MathParseKit/src/MFLn.cpp	\
+	./MathParseKit/src/MFLog10.cpp	\
+	./MathParseKit/src/MFLog.cpp	\
+	./MathParseKit/src/MFMul.cpp	\
+	./MathParseKit/src/MFOpp.cpp	\
+	./MathParseKit/src/MFPow.cpp	\
+	./MathParseKit/src/MFSign.cpp	\
+	./MathParseKit/src/MFSin.cpp	\
+	./MathParseKit/src/MFSinh.cpp	\
+	./MathParseKit/src/MFSqrt.cpp	\
+	./MathParseKit/src/MFSub.cpp	\
+	./MathParseKit/src/MFTan.cpp	\
+	./MathParseKit/src/MFTanh.cpp	\
+	./MathParseKit/src/MFVar.cpp	\
+	./MathParseKit/src/MParser.cpp	\
+	./MathParseKit/src/MRelation.cpp	\
+	./MathParseKit/src/MSistem.cpp	\
+	./MathParseKit/src/MVariableElement.cpp	\
+	./MathParseKit/src/MVariablesList.cpp
 
 LIBOBJ=$(LIBSRC:.cpp=.o)
 
@@ -51,4 +54,4 @@ $(LIB): $(LIBOBJ)
 
 .cpp.o:
 	@echo lib Makefile - compiling $<
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ $(LDFLAGS)

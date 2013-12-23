@@ -79,6 +79,7 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+	  <AdditionalIncludeDirectories>./include</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -88,6 +89,7 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+	  <AdditionalIncludeDirectories>./include</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -98,6 +100,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>./include</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -108,76 +111,77 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+	  <AdditionalIncludeDirectories>./include</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="MFAbs.cpp" />
-    <ClCompile Include="MFAcos.cpp" />
-    <ClCompile Include="MFAcotan.cpp" />
-    <ClCompile Include="MFAdd.cpp" />
-    <ClCompile Include="MFAsin.cpp" />
-    <ClCompile Include="MFAtan.cpp" />
-    <ClCompile Include="MFConst.cpp" />
-    <ClCompile Include="MFCos.cpp" />
-    <ClCompile Include="MFCosh.cpp" />
-    <ClCompile Include="MFCoTan.cpp" />
-    <ClCompile Include="MFCoTanh.cpp" />
-    <ClCompile Include="MFDiv.cpp" />
-    <ClCompile Include="MFExp.cpp" />
-    <ClCompile Include="MFLn.cpp" />
-    <ClCompile Include="MFLog.cpp" />
-    <ClCompile Include="MFLog10.cpp" />
-    <ClCompile Include="MFMul.cpp" />
-    <ClCompile Include="MFOpp.cpp" />
-    <ClCompile Include="MFPow.cpp" />
-    <ClCompile Include="MFSign.cpp" />
-    <ClCompile Include="MFSin.cpp" />
-    <ClCompile Include="MFSinh.cpp" />
-    <ClCompile Include="MFSqrt.cpp" />
-    <ClCompile Include="MFSub.cpp" />
-    <ClCompile Include="MFTan.cpp" />
-    <ClCompile Include="MFTanh.cpp" />
-    <ClCompile Include="MFVar.cpp" />
-    <ClCompile Include="MParser.cpp" />
-    <ClCompile Include="MRelation.cpp" />
-    <ClCompile Include="MSistem.cpp" />
-    <ClCompile Include="MVariableElement.cpp" />
-    <ClCompile Include="MVariablesList.cpp" />
+    <ClCompile Include="src\MFAbs.cpp" />
+    <ClCompile Include="src\MFAcos.cpp" />
+    <ClCompile Include="src\MFAcotan.cpp" />
+    <ClCompile Include="src\MFAdd.cpp" />
+    <ClCompile Include="src\MFAsin.cpp" />
+    <ClCompile Include="src\MFAtan.cpp" />
+    <ClCompile Include="src\MFConst.cpp" />
+    <ClCompile Include="src\MFCos.cpp" />
+    <ClCompile Include="src\MFCosh.cpp" />
+    <ClCompile Include="src\MFCoTan.cpp" />
+    <ClCompile Include="src\MFCoTanh.cpp" />
+    <ClCompile Include="src\MFDiv.cpp" />
+    <ClCompile Include="src\MFExp.cpp" />
+    <ClCompile Include="src\MFLn.cpp" />
+    <ClCompile Include="src\MFLog.cpp" />
+    <ClCompile Include="src\MFLog10.cpp" />
+    <ClCompile Include="src\MFMul.cpp" />
+    <ClCompile Include="src\MFOpp.cpp" />
+    <ClCompile Include="src\MFPow.cpp" />
+    <ClCompile Include="src\MFSign.cpp" />
+    <ClCompile Include="src\MFSin.cpp" />
+    <ClCompile Include="src\MFSinh.cpp" />
+    <ClCompile Include="src\MFSqrt.cpp" />
+    <ClCompile Include="src\MFSub.cpp" />
+    <ClCompile Include="src\MFTan.cpp" />
+    <ClCompile Include="src\MFTanh.cpp" />
+    <ClCompile Include="src\MFVar.cpp" />
+    <ClCompile Include="src\MParser.cpp" />
+    <ClCompile Include="src\MRelation.cpp" />
+    <ClCompile Include="src\MSistem.cpp" />
+    <ClCompile Include="src\MVariableElement.cpp" />
+    <ClCompile Include="src\MVariablesList.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MFAbs.h" />
-    <ClInclude Include="MFAcos.h" />
-    <ClInclude Include="MFAcotan.h" />
-    <ClInclude Include="MFAdd.h" />
-    <ClInclude Include="MFAsin.h" />
-    <ClInclude Include="MFAtan.h" />
-    <ClInclude Include="MFConst.h" />
-    <ClInclude Include="MFCos.h" />
-    <ClInclude Include="MFCosh.h" />
-    <ClInclude Include="MFCoTan.h" />
-    <ClInclude Include="MFCoTanh.h" />
-    <ClInclude Include="MFDiv.h" />
-    <ClInclude Include="MFExp.h" />
-    <ClInclude Include="MFLn.h" />
-    <ClInclude Include="MFLog.h" />
-    <ClInclude Include="MFLog10.h" />
-    <ClInclude Include="MFMul.h" />
-    <ClInclude Include="MFOpp.h" />
-    <ClInclude Include="MFPow.h" />
-    <ClInclude Include="MFSign.h" />
-    <ClInclude Include="MFSin.h" />
-    <ClInclude Include="MFSinh.h" />
-    <ClInclude Include="MFSqrt.h" />
-    <ClInclude Include="MFSub.h" />
-    <ClInclude Include="MFTan.h" />
-    <ClInclude Include="MFTanh.h" />
-    <ClInclude Include="MFunction.h" />
-    <ClInclude Include="MFVar.h" />
-    <ClInclude Include="MParser.h" />
-    <ClInclude Include="MRelation.h" />
-    <ClInclude Include="MSistem.h" />
-    <ClInclude Include="MVariableElement.h" />
-    <ClInclude Include="MVariablesList.h" />
+    <ClInclude Include="include\MFAbs.h" />
+    <ClInclude Include="include\MFAcos.h" />
+    <ClInclude Include="include\MFAcotan.h" />
+    <ClInclude Include="include\MFAdd.h" />
+    <ClInclude Include="include\MFAsin.h" />
+    <ClInclude Include="include\MFAtan.h" />
+    <ClInclude Include="include\MFConst.h" />
+    <ClInclude Include="include\MFCos.h" />
+    <ClInclude Include="include\MFCosh.h" />
+    <ClInclude Include="include\MFCoTan.h" />
+    <ClInclude Include="include\MFCoTanh.h" />
+    <ClInclude Include="include\MFDiv.h" />
+    <ClInclude Include="include\MFExp.h" />
+    <ClInclude Include="include\MFLn.h" />
+    <ClInclude Include="include\MFLog.h" />
+    <ClInclude Include="include\MFLog10.h" />
+    <ClInclude Include="include\MFMul.h" />
+    <ClInclude Include="include\MFOpp.h" />
+    <ClInclude Include="include\MFPow.h" />
+    <ClInclude Include="include\MFSign.h" />
+    <ClInclude Include="include\MFSin.h" />
+    <ClInclude Include="include\MFSinh.h" />
+    <ClInclude Include="include\MFSqrt.h" />
+    <ClInclude Include="include\MFSub.h" />
+    <ClInclude Include="include\MFTan.h" />
+    <ClInclude Include="include\MFTanh.h" />
+    <ClInclude Include="include\MFunction.h" />
+    <ClInclude Include="include\MFVar.h" />
+    <ClInclude Include="include\MParser.h" />
+    <ClInclude Include="include\MRelation.h" />
+    <ClInclude Include="include\MSistem.h" />
+    <ClInclude Include="include\MVariableElement.h" />
+    <ClInclude Include="include\MVariablesList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

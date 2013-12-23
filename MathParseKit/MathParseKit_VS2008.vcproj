@@ -46,69 +46,10 @@
 				Optimization="0"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
+				AdditionalIncludeDirectories=".\include"
 				RuntimeLibrary="0"
 				WarningLevel="3"
 				DebugInformationFormat="4"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLibrarianTool"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
-			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
-			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
-			ConfigurationType="4"
-			CharacterSet="1"
-			WholeProgramOptimization="1"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="2"
-				EnableIntrinsicFunctions="true"
-				RuntimeLibrary="0"
-				EnableFunctionLevelLinking="true"
-				WarningLevel="3"
-				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -167,7 +108,69 @@
 				Optimization="0"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
+				AdditionalIncludeDirectories=".\include"
 				RuntimeLibrary="0"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="4"
+			CharacterSet="1"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories=".\include"
+				RuntimeLibrary="0"
+				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -227,6 +230,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories=".\include"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
@@ -270,131 +274,131 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\MFAbs.cpp"
+				RelativePath=".\src\MFAbs.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFAcos.cpp"
+				RelativePath=".\src\MFAcos.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFAcotan.cpp"
+				RelativePath=".\src\MFAcotan.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFAdd.cpp"
+				RelativePath=".\src\MFAdd.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFAsin.cpp"
+				RelativePath=".\src\MFAsin.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFAtan.cpp"
+				RelativePath=".\src\MFAtan.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFConst.cpp"
+				RelativePath=".\src\MFConst.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFCos.cpp"
+				RelativePath=".\src\MFCos.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFCosh.cpp"
+				RelativePath=".\src\MFCosh.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFCoTan.cpp"
+				RelativePath=".\src\MFCoTan.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFCoTanh.cpp"
+				RelativePath=".\src\MFCoTanh.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFDiv.cpp"
+				RelativePath=".\src\MFDiv.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFExp.cpp"
+				RelativePath=".\src\MFExp.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFLn.cpp"
+				RelativePath=".\src\MFLn.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFLog.cpp"
+				RelativePath=".\src\MFLog.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFLog10.cpp"
+				RelativePath=".\src\MFLog10.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFMul.cpp"
+				RelativePath=".\src\MFMul.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFOpp.cpp"
+				RelativePath=".\src\MFOpp.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFPow.cpp"
+				RelativePath=".\src\MFPow.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFSign.cpp"
+				RelativePath=".\src\MFSign.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFSin.cpp"
+				RelativePath=".\src\MFSin.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFSinh.cpp"
+				RelativePath=".\src\MFSinh.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFSqrt.cpp"
+				RelativePath=".\src\MFSqrt.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFSub.cpp"
+				RelativePath=".\src\MFSub.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFTan.cpp"
+				RelativePath=".\src\MFTan.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFTanh.cpp"
+				RelativePath=".\src\MFTanh.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MFVar.cpp"
+				RelativePath=".\src\MFVar.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MParser.cpp"
+				RelativePath=".\src\MParser.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MRelation.cpp"
+				RelativePath=".\src\MRelation.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MSistem.cpp"
+				RelativePath=".\src\MSistem.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MVariableElement.cpp"
+				RelativePath=".\src\MVariableElement.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MVariablesList.cpp"
+				RelativePath=".\src\MVariablesList.cpp"
 				>
 			</File>
 		</Filter>
@@ -404,135 +408,135 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\MFAbs.h"
+				RelativePath=".\include\MFAbs.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFAcos.h"
+				RelativePath=".\include\MFAcos.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFAcotan.h"
+				RelativePath=".\include\MFAcotan.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFAdd.h"
+				RelativePath=".\include\MFAdd.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFAsin.h"
+				RelativePath=".\include\MFAsin.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFAtan.h"
+				RelativePath=".\include\MFAtan.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFConst.h"
+				RelativePath=".\include\MFConst.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFCos.h"
+				RelativePath=".\include\MFCos.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFCosh.h"
+				RelativePath=".\include\MFCosh.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFCoTan.h"
+				RelativePath=".\include\MFCoTan.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFCoTanh.h"
+				RelativePath=".\include\MFCoTanh.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFDiv.h"
+				RelativePath=".\include\MFDiv.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFExp.h"
+				RelativePath=".\include\MFExp.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFLn.h"
+				RelativePath=".\include\MFLn.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFLog.h"
+				RelativePath=".\include\MFLog.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFLog10.h"
+				RelativePath=".\include\MFLog10.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFMul.h"
+				RelativePath=".\include\MFMul.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFOpp.h"
+				RelativePath=".\include\MFOpp.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFPow.h"
+				RelativePath=".\include\MFPow.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFSign.h"
+				RelativePath=".\include\MFSign.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFSin.h"
+				RelativePath=".\include\MFSin.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFSinh.h"
+				RelativePath=".\include\MFSinh.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFSqrt.h"
+				RelativePath=".\include\MFSqrt.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFSub.h"
+				RelativePath=".\include\MFSub.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFTan.h"
+				RelativePath=".\include\MFTan.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFTanh.h"
+				RelativePath=".\include\MFTanh.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFunction.h"
+				RelativePath=".\include\MFunction.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MFVar.h"
+				RelativePath=".\include\MFVar.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MParser.h"
+				RelativePath=".\include\MParser.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MRelation.h"
+				RelativePath=".\include\MRelation.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MSistem.h"
+				RelativePath=".\include\MSistem.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MVariableElement.h"
+				RelativePath=".\include\MVariableElement.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MVariablesList.h"
+				RelativePath=".\include\MVariablesList.h"
 				>
 			</File>
 		</Filter>
