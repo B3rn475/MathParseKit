@@ -3,11 +3,10 @@
 #
 CC=g++
 INC1=./MathParseKit/include
-INCDIRS=-I${INC1}
+INCDIRS= -I${INC1}
 LDFLAGS=-lm
 CFLAGS=${INCDIRS}
 LIB=MathParseKit.a
-LIBD=MathParseKitd.a
 LIBDEST=./
 
 LIBSRC=	./MathParseKit/src/MFAbs.cpp	\
@@ -45,20 +44,14 @@ LIBSRC=	./MathParseKit/src/MFAbs.cpp	\
 
 LIBOBJ=$(LIBSRC:.cpp=.o)
 
-all: $(LIB) $(LIBD)
+all: $(LIB)
 	#@echo lib Makefile - installing $(LIB)
 	#@install -m 444 $(LIB) $(LIBDEST)
 	
 $(LIB): $(LIBOBJ)
-	@echo lib Makefile - archiving release $(LIB)
-	DFLAGS=
+	@echo lib Makefile - archiving $(LIB)
 	@$(AR) -cvq $(LIB) $(LIBOBJ)
-	
-$(LIBD): $(LIBOBJ)
-	@echo lib Makefile - archiving debug $(LIBD)
-	DFLAGS=-DDEBUG
-	@$(AR) -cvq $(LIBD) $(LIBOBJ)
 
 .cpp.o:
 	@echo lib Makefile - compiling $<
-	@$(CC) $(CFLAGS) $(LDFLAGS) $(DFLAGS) -c $< -o $@ 
+	@$(CC) $(CFLAGS) -c $< -o $@ $(LDFLAGS)
