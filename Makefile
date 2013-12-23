@@ -61,4 +61,4 @@ $(LIBD): $(LIBOBJ)
 
 .cpp.o:
 	@echo lib Makefile - compiling $<
-	@$(CC) $(CFLAGS) -c $< -o $@ $(LDFLAGS)
+	@$(CC) $(CFLAGS) $(LDFLAGS) $(DFLAGS) -c $< -o $@ 
