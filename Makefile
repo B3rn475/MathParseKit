@@ -56,7 +56,7 @@ $(LIB): $(LIBOBJ)
 	
 $(LIBD): $(LIBOBJ)
 	@echo lib Makefile - archiving debug $(LIBD)
-	DFLAGS=-DDEBUG -g
+	DFLAGS=-DDEBUG
 	@$(AR) -cvq $(LIBD) $(LIBOBJ)
 
 .cpp.o:
