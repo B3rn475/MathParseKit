@@ -44,10 +44,10 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories=".\include"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
-				AdditionalIncludeDirectories=".\include"
-				RuntimeLibrary="0"
+				RuntimeLibrary="1"
 				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
@@ -106,9 +106,9 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories=".\include"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
-				AdditionalIncludeDirectories=".\include"
 				RuntimeLibrary="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
