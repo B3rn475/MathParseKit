@@ -5,8 +5,8 @@
  * \license This project is released under the GNU Lesser General Public License.
  */
 
-#ifndef _MFPOW_H
-#define _MFPOW_H
+#ifndef MPK_MFPOW_H
+#define MPK_MFPOW_H
 
 #include "MFunction.h"
 

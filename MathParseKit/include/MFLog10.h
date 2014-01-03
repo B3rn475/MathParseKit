@@ -5,8 +5,8 @@
  * \license This project is released under the GNU Lesser General Public License.
  */
 
-#ifndef _MFLOG10_H
-#define _MFLOG10_H
+#ifndef MPK_MFLOG10_H
+#define MPK_MFLOG10_H
 
 #include "MFunction.h"
 

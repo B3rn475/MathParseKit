@@ -5,8 +5,8 @@
  * \license This project is released under the GNU Lesser General Public License.
  */
 
-#ifndef _MFunction_H
-#define _MFunction_H
+#ifndef MPK_MFunction_H
+#define MPK_MFunction_H
 
 /*!No function.*/
 #define MF_NONE 0

@@ -5,8 +5,8 @@
  * \license This project is released under the GNU Lesser General Public License.
  */
 
-#ifndef _MFVAR_H
-#define _MFVAR_H
+#ifndef MPK_MFVAR_H
+#define MPK_MFVAR_H
 
 #include "MFunction.h"
 namespace mpk

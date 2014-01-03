@@ -5,8 +5,8 @@
  * \license This project is released under the GNU Lesser General Public License.
  */
 
-#ifndef _MRELATION_H
-#define _MRELATION_H
+#ifndef MPK_MRELATION_H
+#define MPK_MRELATION_H
 
 namespace mpk
 {

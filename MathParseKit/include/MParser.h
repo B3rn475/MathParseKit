@@ -5,8 +5,8 @@
  * \license This project is released under the GNU Lesser General Public License.
  */
 
-#ifndef _MPARSER_H
-#define _MPARSER_H
+#ifndef MPK_MPARSER_H
+#define MPK_MPARSER_H
 
 #include "MFunction.h"
 #include "MFAbs.h"

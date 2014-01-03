@@ -5,8 +5,8 @@
  * \license This project is released under the GNU Lesser General Public License.
  */
 
-#ifndef _MVariableElement_H
-#define _MVariableElement_H
+#ifndef MPK_MVariableElement_H
+#define MPK_MVariableElement_H
 
 #include <math.h>
 #include <float.h>

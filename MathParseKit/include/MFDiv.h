@@ -5,8 +5,8 @@
  * \license This project is released under the GNU Lesser General Public License.
  */
 
-#ifndef _MFDIV_H
-#define _MFDIV_H
+#ifndef MPK_MFDIV_H
+#define MPK_MFDIV_H
 
 #include "MFunction.h"
 

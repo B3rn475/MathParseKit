@@ -5,8 +5,8 @@
  * \license This project is released under the GNU Lesser General Public License.
  */
 
-#ifndef _MFCONST_H
-#define _MFCONST_H
+#ifndef MPK_MFCONST_H
+#define MPK_MFCONST_H
 
 #include "MFunction.h"
 

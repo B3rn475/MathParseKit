@@ -5,8 +5,8 @@
  * \license This project is released under the GNU Lesser General Public License.
  */
 
-#ifndef _MFABS_H
-#define _MFABS_H
+#ifndef MPK_MFABS_H
+#define MPK_MFABS_H
 
 #include "MFunction.h"
 

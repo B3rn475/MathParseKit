@@ -6,8 +6,8 @@
  */
 
 
-#ifndef _MSISTEM_H
-#define _MSISTEM_H
+#ifndef MPK_MSISTEM_H
+#define MPK_MSISTEM_H
 
 namespace mpk
 {
