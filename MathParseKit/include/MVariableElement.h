@@ -26,24 +26,24 @@ namespace mpk
 		MVariableElement(const wchar_t* name=NULL,double value = 0.0);
 		MVariableElement(const std::wstring &name,double value = 0.0);
 		MVariableElement(MVariableElement &);
-		inline const std::wstring &GetName() const{
+		const std::wstring &GetName() const{
 			return m_name;
 		}
 		void SetName(const wchar_t* name);
 		void SetName(const std::wstring &name);
-		inline double GetValue() const{
+		double GetValue() const{
 			return m_value;
 		};
-		inline void SetValue(double value){
+		void SetValue(double value){
 			m_value=value;
 		};
 
-		inline MVariableElement &operator=(MVariableElement &rhs){
+		MVariableElement &operator=(MVariableElement &rhs){
 			SetName(rhs.GetName());
 			SetValue(rhs.GetValue());
 			return *this;
 		};
-		inline MVariableElement&operator=(double& rhs){
+		MVariableElement&operator=(double& rhs){
 			this->SetValue(rhs);
 			return *this;
 		};

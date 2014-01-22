@@ -34,7 +34,7 @@ namespace mpk
 		 * 
 		 * \return Returns a constant reference to the name of the variable
 		 */
-		inline const std::wstring &GetName() const{
+		const std::wstring &GetName() const{
 			return m_name;
 		};
 		/*! Get Name of the variable

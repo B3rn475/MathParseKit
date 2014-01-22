@@ -29,10 +29,10 @@ namespace mpk
 		virtual std::wstring ToString() const;
 		virtual MSistem* GetDomain(MSistem *update) const;
 		virtual void Release();
-		inline MFunction *GetNum(){
+		MFunction *GetNum(){
 			return m_num;
 		};
-		inline MFunction *GetDenum(){
+		MFunction *GetDenum(){
 			return m_denum;
 		};
 		void SetNum(MFunction *num);

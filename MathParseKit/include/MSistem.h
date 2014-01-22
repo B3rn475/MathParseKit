@@ -35,7 +35,7 @@ namespace mpk
 			int Add();
 			int Add(int type, const MFunction &lhs, const MFunction &rhs);
 			int Add(MRelation &relation);
-			inline int Count() const{
+			int Count() const{
 				return m_count;
 			};
 			MRelation *Item(int index);

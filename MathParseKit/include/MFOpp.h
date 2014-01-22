@@ -28,7 +28,7 @@ namespace mpk
 		virtual std::wstring ToString() const;
 		virtual MSistem* GetDomain(MSistem *update) const;
 		virtual void Release();
-		inline MFunction *GetFn(){
+		MFunction *GetFn(){
 			return m_fn;
 		}
 		void SetFn(MFunction *fn);

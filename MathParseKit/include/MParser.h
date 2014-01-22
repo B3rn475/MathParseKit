@@ -101,7 +101,7 @@ namespace mpk
 			 * \return Error code.
 			 * \sa MP_OK MP_UNEXPECTED_END MP_UNEXPECTED_CHAR MP_UNKNOWN_FUNCTION
 			 */
-			inline int GetLastError() const
+			int GetLastError() const
 			{
 				return error;
 			}
@@ -110,7 +110,7 @@ namespace mpk
 			 * 
 			 * \return Position in the parsed string.
 			 */
-			inline int GetErrorPosition() const
+			int GetErrorPosition() const
 			{
 				return m_it - m_fStr.begin();
 			}

@@ -43,7 +43,7 @@ namespace mpk
 			void SetType(int type=MR_EQUAL){
 				m_type=type;
 			};
-			inline int GetType() const{
+			int GetType() const{
 				return m_type;
 			};
 			bool IsTrue(MVariablesList *variables) const;

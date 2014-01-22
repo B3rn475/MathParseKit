@@ -35,14 +35,14 @@ namespace mpk
 		 * 
 		 * \return Returns the Value of the constant.
 		 */
-		inline double GetValue() const{
+		double GetValue() const{
 			return m_value;
 		}
 		/*! Set Value of the constant
 		 * 
 		 * \param value New value of the constant.
 		 */
-		inline void SetValue(double value){
+		void SetValue(double value){
 			m_value = value;
 		}
 		

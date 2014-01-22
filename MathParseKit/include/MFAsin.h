@@ -27,7 +27,7 @@ namespace mpk
 		virtual MVariablesList* GetVariablesList(MVariablesList *list=NULL) const;
 		virtual std::wstring ToString() const;
 		virtual MSistem* GetDomain(MSistem *update) const;
-		inline MFunction *GetArgument(){
+		MFunction *GetArgument(){
 			return m_argument;
 		}
 		void SetArgument(MFunction *argument);

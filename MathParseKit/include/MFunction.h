@@ -174,7 +174,7 @@ namespace mpk
 		 * 
 		 * \return Return the type of the function
 		 */
-		inline int GetType() const{
+		int GetType() const{
 			return m_type;
 		};
 		

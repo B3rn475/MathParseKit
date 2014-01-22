@@ -26,7 +26,7 @@ namespace mpk
 			MVariablesList();
 			MVariablesList(MVariablesList &);
 			~MVariablesList();
-			inline int Count(){
+			int Count(){
 				return m_count;
 			}
 			MVariableElement *Add(const wchar_t *name=NULL, double value=0.0);

@@ -29,10 +29,10 @@ namespace mpk
 			virtual MVariablesList* GetVariablesList(MVariablesList *list=NULL) const;
 			virtual std::wstring ToString() const;
 			virtual MSistem* GetDomain(MSistem *update) const;
-			inline MFunction *GetLhs(){
+			MFunction *GetLhs(){
 				return m_lhs;
 			}
-			inline MFunction *GetRhs(){
+			MFunction *GetRhs(){
 				return m_rhs;
 			}
 			void SetLhs(MFunction *);
