@@ -49,7 +49,7 @@ MVariableElement *MVariablesList::Add(MVariableElement *element){
 	return Add(element->GetName(),element->GetValue());
 }
 
-MVariableElement *MVariablesList::GetItem(int index){
+MVariableElement *MVariablesList::GetItem(int index) const{
 	if (index<0 || index>=Count()) return NULL;
 	MvariablesItem *temp=m_pt;
 	for (int i=0;i<index;i++){
@@ -58,7 +58,7 @@ MVariableElement *MVariablesList::GetItem(int index){
 	return temp->link;
 }
 
-MVariableElement *MVariablesList::GetItem(const wchar_t *name){
+MVariableElement *MVariablesList::GetItem(const wchar_t *name) const{
 	if (!name) return NULL;
 	MvariablesItem *temp=m_pt;
 	for (int i=0;i<Count();i++){
@@ -70,7 +70,7 @@ MVariableElement *MVariablesList::GetItem(const wchar_t *name){
 	return NULL;
 }
 
-MVariableElement *MVariablesList::GetItem(const std::wstring &name){
+MVariableElement *MVariablesList::GetItem(const std::wstring &name) const{
 	MvariablesItem *temp=m_pt;
 	for (int i=0;i<Count();i++){
 		if (!name.compare(temp->link->GetName())){
@@ -81,7 +81,7 @@ MVariableElement *MVariablesList::GetItem(const std::wstring &name){
 	return NULL;
 }
 
-int MVariablesList::FindItem(const wchar_t *name){
+int MVariablesList::FindItem(const wchar_t *name) const{
 	if (!name) return -1;
 	MvariablesItem *temp=m_pt;
 	for (int i=0;i<Count();i++){
@@ -93,7 +93,7 @@ int MVariablesList::FindItem(const wchar_t *name){
 	return -1;
 }
 
-int MVariablesList::FindItem(const std::wstring &name){
+int MVariablesList::FindItem(const std::wstring &name) const{
 	MvariablesItem *temp=m_pt;
 	for (int i=0;i<Count();i++){
 		if (!name.compare(temp->link->GetName())){

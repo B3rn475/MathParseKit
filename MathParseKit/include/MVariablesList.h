@@ -26,17 +26,17 @@ namespace mpk
 			MVariablesList();
 			MVariablesList(const MVariablesList &);
 			~MVariablesList();
-			int Count(){
+			int Count() const{
 				return m_count;
 			}
 			MVariableElement *Add(const wchar_t *name=NULL, double value=0.0);
 			MVariableElement *Add(const std::wstring &name, double value=0.0);
 			MVariableElement *Add(MVariableElement *element);
-			MVariableElement *GetItem(int index);
-			MVariableElement *GetItem(const wchar_t *name);
-			MVariableElement *GetItem(const std::wstring &name);
-			int FindItem(const wchar_t *name);
-			int FindItem(const std::wstring &name);
+			MVariableElement *GetItem(int index) const;
+			MVariableElement *GetItem(const wchar_t *name) const;
+			MVariableElement *GetItem(const std::wstring &name) const;
+			int FindItem(const wchar_t *name) const;
+			int FindItem(const std::wstring &name) const;
 			int DeleteElement(int index);
 			int DeleteElement(const wchar_t *name);
 			int DeleteElement(const std::wstring &name);
