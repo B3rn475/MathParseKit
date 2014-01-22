@@ -9,12 +9,8 @@
 
 using namespace mpk;
 
-MVariablesList::MVariablesList(){
-	m_pt=NULL;
-	m_count=0;
-}
-MVariablesList::MVariablesList(MVariablesList &origin){
-	MVariablesList();
+MVariablesList::MVariablesList() : m_pt=NULL, m_count=0 {}
+MVariablesList::MVariablesList(const MVariablesList &origin) : m_pt=NULL, m_count=0{
 	for(int i=0;i<origin.Count();i++){
 		Add(origin.GetItem(i));
 	}

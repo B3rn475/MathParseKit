@@ -24,7 +24,7 @@ namespace mpk
 			int m_count;
 		public:
 			MVariablesList();
-			MVariablesList(MVariablesList &);
+			MVariablesList(const MVariablesList &);
 			~MVariablesList();
 			int Count(){
 				return m_count;
