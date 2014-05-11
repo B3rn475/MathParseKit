@@ -66,7 +66,7 @@ void MFVar::SetName(const wchar_t *buffer,unsigned int len){
 	tName=new wchar_t[len+1];
 	wcsncpy(tName, buffer, len);
 	m_name = tName;
-	free(tName);
+	delete tName;
 }
 
 void MFVar::SetName(const std::wstring name){
