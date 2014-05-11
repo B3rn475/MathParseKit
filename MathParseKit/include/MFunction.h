@@ -89,8 +89,6 @@ namespace mpk
 {
 	/*!MFunction
 	 * Virtual class base for all functions
-	 * 
-	 * Parser class that allow to convert a string into a tree of matematical functions
 	 */
 	class MFunction{
 		protected:
