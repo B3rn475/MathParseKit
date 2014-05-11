@@ -62,11 +62,7 @@ MSistem* MFVar::GetDomain(MSistem *update) const{
 }
 
 void MFVar::SetName(const wchar_t *buffer,unsigned int len){
-	wchar_t *tName;
-	tName=new wchar_t[len+1];
-	wcsncpy(tName, buffer, len);
-	m_name = tName;
-	delete tName;
+	m_name = std::wstring(buffer, len);
 }
 
 void MFVar::SetName(const std::wstring name){
