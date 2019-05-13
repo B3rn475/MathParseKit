@@ -143,14 +143,14 @@ void MFPow::SetExponent(MFunction *exponent){
 
 std::wstring MFPow::ToString() const {
 	std::wostringstream stream;
-	bool parentesis = m_base->GetType() == MF_ADD || m_base->GetType() == MF_SUB || m_base->GetType() == MF_MUL || m_base->GetType() == MF_DIV;
+	bool parentesis = m_base->GetType() == MF_ADD || m_base->GetType() == MF_SUB || m_base->GetType() == MF_MUL || m_base->GetType() == MF_PER || m_base->GetType() == MF_DIV;
 	if (parentesis)
 		stream << "(";
 	stream << m_base->ToString();
 	if (parentesis)
 		stream << ")";
 	stream << L"^";
-	parentesis = m_exponent->GetType() == MF_ADD || m_exponent->GetType() == MF_SUB || m_exponent->GetType() == MF_MUL || m_exponent->GetType() == MF_DIV;
+	parentesis = m_exponent->GetType() == MF_ADD || m_exponent->GetType() == MF_SUB || m_exponent->GetType() == MF_MUL || m_exponent->GetType() == MF_PER || m_exponent->GetType() == MF_DIV;
 	if (parentesis)
 		stream << "(";
 	stream << m_exponent->ToString();
