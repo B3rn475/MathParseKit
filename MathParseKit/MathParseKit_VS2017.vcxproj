@@ -146,6 +146,7 @@
     <ClCompile Include="src\MFLog10.cpp" />
     <ClCompile Include="src\MFMul.cpp" />
     <ClCompile Include="src\MFOpp.cpp" />
+    <ClCompile Include="src\MFPer.cpp" />
     <ClCompile Include="src\MFPow.cpp" />
     <ClCompile Include="src\MFSign.cpp" />
     <ClCompile Include="src\MFSin.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="include\MFLog10.h" />
     <ClInclude Include="include\MFMul.h" />
     <ClInclude Include="include\MFOpp.h" />
+    <ClInclude Include="include\MFPer.h" />
     <ClInclude Include="include\MFPow.h" />
     <ClInclude Include="include\MFSign.h" />
     <ClInclude Include="include\MFSin.h" />

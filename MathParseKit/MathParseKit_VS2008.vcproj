@@ -346,6 +346,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\MFPer.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\MFPow.cpp"
 				>
 			</File>
@@ -477,6 +481,10 @@
 			</File>
 			<File
 				RelativePath=".\include\MFOpp.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\MFPer.h"
 				>
 			</File>
 			<File

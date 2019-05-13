@@ -24,6 +24,7 @@
 #include "MFLog.h"
 #include "MFLog10.h"
 #include "MFMul.h"
+#include "MFPer.h"
 #include "MFOpp.h"
 #include "MFPow.h"
 #include "MFSin.h"
@@ -165,7 +166,7 @@ namespace mpk
 			
 			/*! Check if all chars are valid
 			 * 
-			 * (),.+-*^/abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
+			 * (),.+-*^/%abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
 			 * 
 			 * \param fStr String to check.
 			 * \return Returns Test passed without errors.

@@ -78,7 +78,7 @@ bool MParser::AnalizePlane(MFunction **pt, wchar_t delimiter){
 		error=MP_UNEXPECTED_END;
 		return false;
 	}
-	if (*m_it==')' || *m_it==',' || *m_it=='*' || *m_it=='/' || *m_it=='^'){
+	if (*m_it==')' || *m_it==',' || *m_it=='*' || *m_it=='/' || *m_it == '%' || *m_it=='^'){
 		error=MP_UNEXPECTED_CHAR;
 		return false;
 	}
@@ -289,7 +289,7 @@ bool MParser::AnalizeFunction(MFunction **pt){
 }
 
 bool MParser::AnalizeCharCoerency(){
-	wchar_t mask[]=L" (),.+-*/^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	wchar_t mask[]=L" (),.+-*/^%abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 	int pos = wcsspn(m_fStr.c_str(),mask);
 	if (pos==wcslen(m_fStr.c_str())) return true;
 	m_it = m_fStr.begin() + pos;
@@ -322,7 +322,7 @@ bool MParser::CreateList(FListElement **pt, wchar_t delimiter){
 			return false;
 		}
 	}
-	while (m_it != m_fStr.end() && (*m_it == '+' || *m_it == '-' || *m_it == '*' || *m_it == '/' || *m_it == '^')){
+	while (m_it != m_fStr.end() && (*m_it == '+' || *m_it == '-' || *m_it == '*' || *m_it == '/' || *m_it == '%' || *m_it == '^')){
 		walker->next = (FListElement*)malloc(sizeof(FListElement));
 		walker = walker->next;
 		walker->op = *m_it;
@@ -368,7 +368,7 @@ bool MParser::ConvertList(FListElement *pt){
 	}
 	tp=pt;
 	while (tp->next){
-		if(tp->next->op == '*'){
+		if (tp->next->op == '*') {
 			FListElement *temp = tp->next;
 			tp->next = tp->next->next;
 			MFMul *ftemp = new MFMul();
@@ -376,6 +376,14 @@ bool MParser::ConvertList(FListElement *pt){
 			ftemp->SetRhs(temp->func);
 			tp->func = (MFunction*)ftemp;
 			free(temp);
+		}else if (tp->next->op == '%') {
+				FListElement *temp = tp->next;
+				tp->next = tp->next->next;
+				MFPer *ftemp = new MFPer();
+				ftemp->SetLhs(tp->func);
+				ftemp->SetRhs(temp->func);
+				tp->func = (MFunction*)ftemp;
+				free(temp);
 		}else if (tp->next->op=='/'){
 			FListElement *temp = tp->next;
 			tp->next = tp->next->next;
@@ -424,7 +432,7 @@ bool MParser::ConvertElement(MFunction **pt){
 		error = MP_UNEXPECTED_END;
 		return false;
 	}
-	if (*m_it == '+' || *m_it == '-' || *m_it == '/' || *m_it == '*' || *m_it == '^' || *m_it == ')'){
+	if (*m_it == '+' || *m_it == '-' || *m_it == '/' || *m_it == '*' || *m_it == '%' || *m_it == '^' || *m_it == ')'){
 		error = MP_UNEXPECTED_CHAR;
 		return false;
 	}
